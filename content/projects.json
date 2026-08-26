@@ -37,6 +37,15 @@
     "model": "CL60",
     "assetPath": "assets/projects/210825-colbor-cl60",
     "cover": "01@1x.webp"
+  },
+  {
+    "id": "210112-synco-mc2",
+    "sourceFolder": "210112 SYNCO MC2",
+    "startedAt": "2021-01-12",
+    "brand": "SYNCO",
+    "model": "MC2",
+    "assetPath": "assets/projects/210112-synco-mc2",
+    "cover": "01@1x.webp"
   }
 ]
 
