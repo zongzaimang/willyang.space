@@ -1,0 +1,18 @@
+.header.is-floating{
+  position:fixed;
+  inset:0 0 auto;
+  z-index:30;
+  height:86px !important;
+  padding:29px var(--edge) !important;
+  background:#fff;
+  transform:translateY(-115%);
+  transition:transform .42s cubic-bezier(.2,.8,.2,1);
+  will-change:transform;
+}
+
+.header.is-floating.is-visible{transform:translateY(0)}
+
+@media(max-width:760px){
+  .header.is-floating{height:72px !important;padding:24px var(--edge) !important}
+}
+
