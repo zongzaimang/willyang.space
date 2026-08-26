@@ -9,6 +9,15 @@
     "url": "/240129-nitecore-hc65-uhe/",
     "assetPath": "assets/projects/240129-nitecore-hc65-uhe",
     "cover": "01.png"
+  },
+  {
+    "id": "210805-synco-p1s",
+    "sourceFolder": "210805 SYNCO P1S",
+    "startedAt": "2021-08-05",
+    "brand": "SYNCO",
+    "model": "P1S",
+    "assetPath": "assets/projects/210805-synco-p1s",
+    "cover": "01@1x.jpg"
   }
 ]
 
