@@ -56,20 +56,22 @@
 <script>
 const names=['Orion Table','Common Chair','Pillow Seat','Onda Cabinet','Haze Mirror','Boo Speaker','Mori Light','Parcel Stool','Tide Vessel','Fold Lamp','Sora Clock','Halo Fan','Cove Storage','Polo Bench','Pebble Radio','Kite Kettle','Mono Tray','Arc Stool','Shift Bottle','Nero Desk','Ridge Chair','Citrus Press','Dune Shelf','Bloom Pot','Cado Lamp','Tempo Table','Nook Bed','Brush Vase','Loop Clock','Melt Console','Mica Chair','Rill Speaker','June Seat','Core Lamp','Drift Shelf','Shell Bowl','Aero Stool','Muse Mirror','Line Cabinet','Oat Table','Faro Light','Wisp Chair','Pond Vessel','Silo Bench','Noma Radio','Tact Lamp','Skein Table','Sage Chair','Bento Tray','Swell Shelf'];
 const brands=['Mori','Forma','Field Notes','Atelier Uno','Studio Ore','Noma','Bene','Koto','Arc Objects','Lume'];
-const gallery=document.querySelector('.gallery'),more=document.querySelector('#more'),loadZone=document.querySelector('#load-zone'),footer=document.querySelector('#footer');let loaded=0;function add(amount){const end=Math.min(loaded+amount,names.length);for(let i=loaded;i<end;i++){let shape=i%9,a=document.createElement('a');a.className='card s'+shape;a.href='project.html?id='+i;a.setAttribute('aria-label','View '+names[i]);a.innerHTML=`<div class="image">
+const startDates=['240129',...Array.from({length:names.length-1},(_,i)=>String(231231-i*5).padStart(6,'0'))];
+const projectOrder=names.map((name,id)=>({id,name,startDate:startDates[id]})).sort((a,b)=>b.startDate.localeCompare(a.startDate));
+const gallery=document.querySelector('.gallery'),more=document.querySelector('#more'),loadZone=document.querySelector('#load-zone'),footer=document.querySelector('#footer');let loaded=0;function add(amount){const end=Math.min(loaded+amount,projectOrder.length);for(let orderIndex=loaded;orderIndex<end;orderIndex++){const item=projectOrder[orderIndex],i=item.id;let shape=i%9,a=document.createElement('a');a.className='card s'+shape;a.dataset.projectId=i;a.href='project.html?id='+i;a.setAttribute('aria-label','View '+names[i]);a.innerHTML=`<div class="image">
 <i class="shape">
 </i>
 </div>
 <div class="label">
 <span class="project">${names[i]}</span>
-<span class="year">202${i%6}</span>
+<span class="year">20${item.startDate.slice(0,2)}</span>
 <span class="brand">${brands[i%brands.length]}<sup>®</sup>
 </span>
-</div>`;gallery.append(a)}loaded=end;if(loaded===names.length){loadZone.remove();footer.classList.add('show')}}add(30);more.addEventListener('click',()=>add(30));
+</div>`;gallery.append(a)}loaded=end;if(loaded===projectOrder.length){loadZone.remove();footer.classList.add('show')}}add(30);more.addEventListener('click',()=>add(30));
 </script>
 <style>:root{--brand:#F2C534;--brand-deep:#C88E00;--paper:#FFFFFF;--soft:#F6F5F0;--muted:#77746C}.image:after{background:var(--brand)}.year,.brand{color:var(--muted)}.more{border-color:var(--ink);background:var(--paper)}.more:hover{background:var(--brand);border-color:var(--brand);color:var(--ink)}.nav a{position:relative}.nav a.active:after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:2px;background:var(--brand)}</style>
-<script>const links=[['Works','index.html'],['News','news.html'],['About','about.html']];document.querySelectorAll('.nav,.footer-nav').forEach(nav=>{nav.querySelectorAll('a').forEach((a,i)=>{a.textContent=links[i][0];a.href=links[i][1];a.classList.toggle('active',i===0)})});document.querySelectorAll('.card').forEach((card,i)=>{card.href='project.html?id='+i;card.setAttribute('aria-label','View '+names[i])});</script>
-<script>const featured=document.querySelector('.card');if(featured){featured.querySelector('.image').innerHTML='<img src="assets/hc65-uhe/01-cover.jpg" alt="HC65 UHE headlamp" style="width:100%;height:100%;object-fit:cover;display:block">';featured.querySelector('.project').textContent='HC65 UHE';featured.querySelector('.year').textContent='2024';featured.querySelector('.brand').innerHTML='NITECORE<sup>®</sup>';featured.setAttribute('aria-label','View HC65 UHE')}</script>
+<script>const links=[['Works','index.html'],['News','news.html'],['About','about.html']];document.querySelectorAll('.nav,.footer-nav').forEach(nav=>{nav.querySelectorAll('a').forEach((a,i)=>{a.textContent=links[i][0];a.href=links[i][1];a.classList.toggle('active',i===0)})});document.querySelectorAll('.card').forEach(card=>{const i=Number(card.dataset.projectId);card.href='project.html?id='+i;card.setAttribute('aria-label','View '+names[i])});</script>
+<script>const featured=document.querySelector('.card[data-project-id="0"]');if(featured){featured.querySelector('.image').innerHTML='<img src="assets/hc65-uhe/01-cover-alpha.png" alt="HC65 UHE headlamp" style="width:100%;height:100%;object-fit:contain;display:block">';featured.querySelector('.project').textContent='HC65 UHE';featured.querySelector('.year').textContent='2024';featured.querySelector('.brand').innerHTML='NITECORE<sup>®</sup>';featured.setAttribute('aria-label','View HC65 UHE')}</script>
 <script src="/sticky-header.js"></script>
 </body>
 </html>
