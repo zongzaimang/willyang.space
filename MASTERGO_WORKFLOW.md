@@ -61,7 +61,7 @@ MasterGo 页面依靠创建时间与手动拖动顺序管理，不按名称排�
 ## Export only once per update
 
 1. In the project’s `网站` page, mark each selected container as an export slice.
-2. Use the default numeric order only: `01.png`, `02.png`, `03.png`, `04.png` … `01` is always the Works cover; every following image is shown vertically on the project page in number order. Do not place alternative JPG/WebP/PNG versions of the same number in this export folder.
+2. Use the default numeric order only: `01.png`, `02.png`, `03.png`, `04.png` … MasterGo’s default `01@1x.jpg` form is also accepted. `01` is always the Works cover; every following image is shown vertically on the project page in number order. Do not place alternative JPG/WebP/PNG versions of the same number in this export folder.
 3. Use PNG or lossless WebP for transparent artwork. Do not use JPG when transparency matters.
 4. Run MasterGo “Export all slices” (`Shift + Ctrl + E` on Windows) and export to the project source folder:
    `mastergo-exports/<project-id>/`
