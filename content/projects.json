@@ -28,6 +28,15 @@
     "assetPath": "assets/projects/201201-colbor-pl8-r",
     "cover": "00@1x.webp",
     "detailStartsAt": "01@1x.webp"
+  },
+  {
+    "id": "210825-colbor-cl60",
+    "sourceFolder": "210825 COLBOR CL60",
+    "startedAt": "2021-08-25",
+    "brand": "COLBOR",
+    "model": "CL60",
+    "assetPath": "assets/projects/210825-colbor-cl60",
+    "cover": "01@1x.webp"
   }
 ]
 
