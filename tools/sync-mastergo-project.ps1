@@ -43,8 +43,8 @@ if ($files.Count -eq 0) {
   throw 'No PNG, WebP, JPG, or JPEG images were found in the export folder.'
 }
 
-if (-not ($files.Name -match '^01(?:@[a-zA-Z0-9_-]+)?\.(png|webp|jpe?g)$')) {
-  throw 'A cover file named 01.png (or the MasterGo default 01@1x.jpg) is required.'
+if (-not ($files.Name -match '^0[01](?:@[a-zA-Z0-9_-]+)?\.(png|webp|jpe?g)$')) {
+  throw 'A cover file named 01.png (or optional 00.png) is required.'
 }
 
 $duplicateOrders = $files | Group-Object { [int](($_.BaseName -replace '@.*$', '').Substring(0, 2)) } | Where-Object Count -gt 1
