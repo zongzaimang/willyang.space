@@ -60,7 +60,8 @@ const realProjects=[
   {id:0,name:'HC65 UHE',brand:'NITECORE',startDate:'240129',cover:'assets/hc65-uhe/01-cover-alpha.png'},
   {id:50,name:'P1S',brand:'SYNCO',startDate:'210805',cover:'assets/projects/210805-synco-p1s/01@1x.jpg'},
   {id:51,name:'PL8-R',brand:'COLBOR',startDate:'201201',cover:'assets/projects/201201-colbor-pl8-r/00@1x.webp'},
-  {id:52,name:'CL60',brand:'COLBOR',startDate:'210825',cover:'assets/projects/210825-colbor-cl60/01@1x.webp'}
+  {id:52,name:'CL60',brand:'COLBOR',startDate:'210825',cover:'assets/projects/210825-colbor-cl60/01@1x.webp'},
+  {id:53,name:'MC2',brand:'SYNCO',startDate:'210112',cover:'assets/projects/210112-synco-mc2/01@1x.webp'}
 ];
 const virtualProjects=names.slice(1).map((name,id)=>({id:id+1,name,brand:brands[(id+1)%brands.length],startDate:String(200001-id*5).padStart(6,'0')}));
 const projectOrder=[...realProjects,...virtualProjects].sort((a,b)=>b.startDate.localeCompare(a.startDate));
@@ -79,6 +80,7 @@ const gallery=document.querySelector('.gallery'),more=document.querySelector('#m
 <script>const links=[['Works','index.html'],['News','news.html'],['About','about.html']];document.querySelectorAll('.nav,.footer-nav').forEach(nav=>{nav.querySelectorAll('a').forEach((a,i)=>{a.textContent=links[i][0];a.href=links[i][1];a.classList.toggle('active',i===0)})});document.querySelectorAll('.card').forEach(card=>{const i=Number(card.dataset.projectId);card.href=i===0?'/240129-nitecore-hc65-uhe/':'project.html?id='+i;card.setAttribute('aria-label','View '+card.dataset.projectName)});const covers={0:'assets/hc65-uhe/01-cover-alpha.png',50:'assets/projects/210805-synco-p1s/01@1x.jpg'};Object.entries(covers).forEach(([id,src])=>{const card=document.querySelector('.card[data-project-id="'+id+'"]');if(card)card.querySelector('.image').innerHTML='<img src="'+src+'" alt="'+card.dataset.projectName+'" style="width:100%;height:100%;object-fit:contain;display:block">'})</script>
 <script>const colborCard=document.querySelector('.card[data-project-id="51"]');if(colborCard)colborCard.querySelector('.image').innerHTML='<img src="assets/projects/201201-colbor-pl8-r/00@1x.webp" alt="PL8-R" style="width:100%;height:100%;object-fit:contain;display:block">'</script>
 <script>const cl60Card=document.querySelector('.card[data-project-id="52"]');if(cl60Card)cl60Card.querySelector('.image').innerHTML='<img src="assets/projects/210825-colbor-cl60/01@1x.webp" alt="CL60" style="width:100%;height:100%;object-fit:contain;display:block">'</script>
+<script>const mc2Card=document.querySelector('.card[data-project-id="53"]');if(mc2Card)mc2Card.querySelector('.image').innerHTML='<img src="assets/projects/210112-synco-mc2/01@1x.webp" alt="MC2" style="width:100%;height:100%;object-fit:contain;display:block">'</script>
 <script src="/sticky-header.js"></script>
 </body>
 </html>
