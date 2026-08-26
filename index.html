@@ -69,6 +69,7 @@ const gallery=document.querySelector('.gallery'),more=document.querySelector('#m
 </script>
 <style>:root{--brand:#F2C534;--brand-deep:#C88E00;--paper:#FFFFFF;--soft:#F6F5F0;--muted:#77746C}.image:after{background:var(--brand)}.year,.brand{color:var(--muted)}.more{border-color:var(--ink);background:var(--paper)}.more:hover{background:var(--brand);border-color:var(--brand);color:var(--ink)}.nav a{position:relative}.nav a.active:after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:2px;background:var(--brand)}</style>
 <script>const links=[['Works','index.html'],['News','news.html'],['About','about.html']];document.querySelectorAll('.nav,.footer-nav').forEach(nav=>{nav.querySelectorAll('a').forEach((a,i)=>{a.textContent=links[i][0];a.href=links[i][1];a.classList.toggle('active',i===0)})});document.querySelectorAll('.card').forEach((card,i)=>{card.href='project.html?id='+i;card.setAttribute('aria-label','View '+names[i])});</script>
+<script>const featured=document.querySelector('.card');if(featured){featured.querySelector('.image').innerHTML='<img src="assets/hc65-uhe/01-cover.jpg" alt="HC65 UHE headlamp" style="width:100%;height:100%;object-fit:cover;display:block">';featured.querySelector('.project').textContent='HC65 UHE';featured.querySelector('.year').textContent='2024';featured.querySelector('.brand').innerHTML='NITECORE<sup>®</sup>';featured.setAttribute('aria-label','View HC65 UHE')}</script>
 <script src="/sticky-header.js"></script>
 </body>
 </html>
