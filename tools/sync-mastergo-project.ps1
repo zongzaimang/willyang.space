@@ -36,18 +36,18 @@ if (-not (Test-Path -LiteralPath $sourcePath -PathType Container)) {
 }
 
 $files = Get-ChildItem -LiteralPath $sourcePath -File |
-  Where-Object { $allowedExtensions -contains $_.Extension.ToLowerInvariant() -and $_.Name -match '^\d{2}-.+\.(png|webp|jpe?g)$' } |
+  Where-Object { $allowedExtensions -contains $_.Extension.ToLowerInvariant() -and $_.Name -match '^\d{2}(?:@[a-zA-Z0-9_-]+)?\.(png|webp|jpe?g)$' } |
   Sort-Object Name
 
 if ($files.Count -eq 0) {
   throw 'No PNG, WebP, JPG, or JPEG images were found in the export folder.'
 }
 
-if (-not ($files.Name -match '^01\.(png|webp|jpe?g)$')) {
-  throw 'A cover file named 01.png (or .webp/.jpg) is required.'
+if (-not ($files.Name -match '^01(?:@[a-zA-Z0-9_-]+)?\.(png|webp|jpe?g)$')) {
+  throw 'A cover file named 01.png (or the MasterGo default 01@1x.jpg) is required.'
 }
 
-$duplicateOrders = $files | Group-Object { [int]$_.BaseName.Substring(0, 2) } | Where-Object Count -gt 1
+$duplicateOrders = $files | Group-Object { [int](($_.BaseName -replace '@.*$', '').Substring(0, 2)) } | Where-Object Count -gt 1
 if ($duplicateOrders) {
   $duplicates = ($duplicateOrders | ForEach-Object { $_.Group.Name -join ', ' }) -join '; '
   throw "Each image position needs one stable export file. Duplicate positions found: $duplicates"
