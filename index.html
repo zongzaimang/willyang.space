@@ -6,6 +6,7 @@
 <title>Will Yang — Industrial Design</title>
 <meta name="description" content="Will Yang 的工业设计作品集。">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/sticky-header.css">
 <meta name="theme-color" content="#F2C534">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap');
@@ -68,6 +69,7 @@ const gallery=document.querySelector('.gallery'),more=document.querySelector('#m
 </script>
 <style>:root{--brand:#F2C534;--brand-deep:#C88E00;--paper:#FFFFFF;--soft:#F6F5F0;--muted:#77746C}.image:after{background:var(--brand)}.year,.brand{color:var(--muted)}.more{border-color:var(--ink);background:var(--paper)}.more:hover{background:var(--brand);border-color:var(--brand);color:var(--ink)}.nav a{position:relative}.nav a.active:after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:2px;background:var(--brand)}</style>
 <script>const links=[['Works','index.html'],['News','news.html'],['About','about.html']];document.querySelectorAll('.nav,.footer-nav').forEach(nav=>{nav.querySelectorAll('a').forEach((a,i)=>{a.textContent=links[i][0];a.href=links[i][1];a.classList.toggle('active',i===0)})});document.querySelectorAll('.card').forEach((card,i)=>{card.href='project.html?id='+i;card.setAttribute('aria-label','View '+names[i])});</script>
+<script src="/sticky-header.js"></script>
 </body>
 </html>
 
