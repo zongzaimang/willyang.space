@@ -43,8 +43,8 @@ if ($files.Count -eq 0) {
   throw 'No PNG, WebP, JPG, or JPEG images were found in the export folder.'
 }
 
-if (-not ($files.Name -match '^01-cover\.(png|webp|jpe?g)$')) {
-  throw 'A cover file named 01-cover.png (or .webp/.jpg) is required.'
+if (-not ($files.Name -match '^01\.(png|webp|jpe?g)$')) {
+  throw 'A cover file named 01.png (or .webp/.jpg) is required.'
 }
 
 $duplicateOrders = $files | Group-Object { [int]$_.BaseName.Substring(0, 2) } | Where-Object Count -gt 1
