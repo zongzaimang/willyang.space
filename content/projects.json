@@ -18,6 +18,16 @@
     "model": "P1S",
     "assetPath": "assets/projects/210805-synco-p1s",
     "cover": "01@1x.jpg"
+  },
+  {
+    "id": "201201-colbor-pl8-r",
+    "sourceFolder": "201201 COLBOR PL8-R",
+    "startedAt": "2020-12-01",
+    "brand": "COLBOR",
+    "model": "PL8-R",
+    "assetPath": "assets/projects/201201-colbor-pl8-r",
+    "cover": "00@1x.webp",
+    "detailStartsAt": "01@1x.webp"
   }
 ]
 
