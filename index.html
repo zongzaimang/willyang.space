@@ -54,8 +54,6 @@
 </div>
 </footer>
 <script>
-const names=['Orion Table','Common Chair','Pillow Seat','Onda Cabinet','Haze Mirror','Boo Speaker','Mori Light','Parcel Stool','Tide Vessel','Fold Lamp','Sora Clock','Halo Fan','Cove Storage','Polo Bench','Pebble Radio','Kite Kettle','Mono Tray','Arc Stool','Shift Bottle','Nero Desk','Ridge Chair','Citrus Press','Dune Shelf','Bloom Pot','Cado Lamp','Tempo Table','Nook Bed','Brush Vase','Loop Clock','Melt Console','Mica Chair','Rill Speaker','June Seat','Core Lamp','Drift Shelf','Shell Bowl','Aero Stool','Muse Mirror','Line Cabinet','Oat Table','Faro Light','Wisp Chair','Pond Vessel','Silo Bench','Noma Radio','Tact Lamp','Skein Table','Sage Chair','Bento Tray','Swell Shelf'];
-const brands=['Mori','Forma','Field Notes','Atelier Uno','Studio Ore','Noma','Bene','Koto','Arc Objects','Lume'];
 const realProjects=[
   {id:0,name:'HC65 UHE',brand:'NITECORE',startDate:'240129',cover:'assets/hc65-uhe/01-cover-alpha.png'},
   {id:50,name:'P1S',brand:'SYNCO',startDate:'210805',cover:'assets/projects/210805-synco-p1s/01@1x.jpg'},
@@ -63,8 +61,7 @@ const realProjects=[
   {id:52,name:'CL60',brand:'COLBOR',startDate:'210825',cover:'assets/projects/210825-colbor-cl60/01@1x.webp'},
   {id:53,name:'MC2',brand:'SYNCO',startDate:'210112',cover:'assets/projects/210112-synco-mc2/01@1x.webp'}
 ];
-const virtualProjects=names.slice(1).map((name,id)=>({id:id+1,name,brand:brands[(id+1)%brands.length],startDate:String(200001-id*5).padStart(6,'0')}));
-const projectOrder=[...realProjects,...virtualProjects].sort((a,b)=>b.startDate.localeCompare(a.startDate));
+const projectOrder=[...realProjects].sort((a,b)=>b.startDate.localeCompare(a.startDate));
 const gallery=document.querySelector('.gallery'),more=document.querySelector('#more'),loadZone=document.querySelector('#load-zone'),footer=document.querySelector('#footer');let loaded=0;function add(amount){const end=Math.min(loaded+amount,projectOrder.length);for(let orderIndex=loaded;orderIndex<end;orderIndex++){const item=projectOrder[orderIndex],i=item.id;let shape=i%9,a=document.createElement('a');a.className='card s'+shape;a.dataset.projectId=i;a.dataset.projectName=item.name;a.dataset.projectBrand=item.brand;a.href='project.html?id='+i;a.setAttribute('aria-label','View '+item.name);a.innerHTML=`<div class="image">
 <i class="shape">
 </i>
