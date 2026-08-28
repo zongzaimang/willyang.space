@@ -2,13 +2,15 @@
   const header = document.querySelector('.header');
   if (!header) return;
 
-  const revealAfter = header.offsetHeight + 12;
   let lastY = window.scrollY;
   let pending = false;
 
   const update = () => {
     const y = window.scrollY;
-    if (y <= 8 || y < revealAfter) {
+    // Keep the header floating until the document has actually reached its top.
+    // Resetting it earlier changes it from fixed back to normal flow mid-scroll,
+    // which makes the reveal animation disappear and jump.
+    if (y <= 8) {
       header.classList.remove('is-floating', 'is-visible');
     } else {
       header.classList.add('is-floating');
