@@ -57,6 +57,7 @@ MasterGo 页面依靠创建时间与手动拖动顺序管理，不按名称排�
 - Convert `YYMMDD` to `YYYY-MM-DD` and store it as `startedAt`. It controls Works sorting, newest first, even though the page only shows the year.
 - Example: `240129 NITECORE HC65 UHE` → `id: 240129-nitecore-hc65-uhe`, `startedAt: 2024-01-29`, brand `NITECORE`, model `HC65 UHE`.
 - Record every published project in `content/projects.json`.
+- Set `slug` to the lowercase `brand-model` form (for example, `nitecore-hc65-uhe`) and assign its `detailId`. The public project URL is always `/<slug>/`; the date-prefixed project ID remains internal metadata only.
 
 ## Export only once per update
 
@@ -68,6 +69,7 @@ MasterGo 页面依靠创建时间与手动拖动顺序管理，不按名称排�
 5. Preview changes locally:
    `./tools/sync-mastergo-project.ps1 -ProjectId '<project-id>' -Source 'mastergo-exports/<project-id>'`
 6. If the list is correct, run the same command with `-Apply`, then tell Codex: `同步 <project-id>`.
+7. After adding a new project record or changing a slug, run `./tools/generate-project-pages.ps1` to generate the static project URL.
 
 `mastergo-exports/` is your local source archive and is ignored by Git. The script only copies new or changed files into the publish folder, so replacing one image in MasterGo updates only that image in the website asset folder.
 
