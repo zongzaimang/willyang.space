@@ -78,6 +78,7 @@ const gallery=document.querySelector('.gallery'),more=document.querySelector('#m
 <script>const colborCard=document.querySelector('.card[data-project-id="51"]');if(colborCard)colborCard.querySelector('.image').innerHTML='<img src="assets/projects/201201-colbor-pl8-r/00@1x.webp" alt="PL8-R" style="width:100%;height:100%;object-fit:contain;display:block">'</script>
 <script>const cl60Card=document.querySelector('.card[data-project-id="52"]');if(cl60Card)cl60Card.querySelector('.image').innerHTML='<img src="assets/projects/210825-colbor-cl60/01@1x.webp" alt="CL60" style="width:100%;height:100%;object-fit:contain;display:block">'</script>
 <script>const mc2Card=document.querySelector('.card[data-project-id="53"]');if(mc2Card)mc2Card.querySelector('.image').innerHTML='<img src="assets/projects/210112-synco-mc2/01@1x.webp" alt="MC2" style="width:100%;height:100%;object-fit:contain;display:block">'</script>
+<script>const projectUrls={0:'/nitecore-hc65-uhe/',50:'/synco-p1s/',51:'/colbor-pl8-r/',52:'/colbor-cl60/',53:'/synco-mc2/'};document.querySelectorAll('.card').forEach(card=>{const url=projectUrls[Number(card.dataset.projectId)];if(url)card.href=url})</script>
 <script src="/sticky-header.js"></script>
 </body>
 </html>
