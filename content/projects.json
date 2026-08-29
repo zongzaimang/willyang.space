@@ -6,7 +6,9 @@
     "startedAt": "2024-01-29",
     "brand": "NITECORE",
     "model": "HC65 UHE",
-    "url": "/240129-nitecore-hc65-uhe/",
+    "slug": "nitecore-hc65-uhe",
+    "detailId": "0",
+    "url": "/nitecore-hc65-uhe/",
     "assetPath": "assets/projects/240129-nitecore-hc65-uhe",
     "cover": "01.png"
   },
@@ -16,6 +18,9 @@
     "startedAt": "2021-08-05",
     "brand": "SYNCO",
     "model": "P1S",
+    "slug": "synco-p1s",
+    "detailId": "50",
+    "url": "/synco-p1s/",
     "assetPath": "assets/projects/210805-synco-p1s",
     "cover": "01@1x.jpg"
   },
@@ -25,6 +30,9 @@
     "startedAt": "2020-12-01",
     "brand": "COLBOR",
     "model": "PL8-R",
+    "slug": "colbor-pl8-r",
+    "detailId": "51",
+    "url": "/colbor-pl8-r/",
     "assetPath": "assets/projects/201201-colbor-pl8-r",
     "cover": "00@1x.webp",
     "detailStartsAt": "01@1x.webp"
@@ -35,6 +43,9 @@
     "startedAt": "2021-08-25",
     "brand": "COLBOR",
     "model": "CL60",
+    "slug": "colbor-cl60",
+    "detailId": "52",
+    "url": "/colbor-cl60/",
     "assetPath": "assets/projects/210825-colbor-cl60",
     "cover": "01@1x.webp"
   },
@@ -44,6 +55,9 @@
     "startedAt": "2021-01-12",
     "brand": "SYNCO",
     "model": "MC2",
+    "slug": "synco-mc2",
+    "detailId": "53",
+    "url": "/synco-mc2/",
     "assetPath": "assets/projects/210112-synco-mc2",
     "cover": "01@1x.webp"
   }
