@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="/">
+<script>window.__projectId='0';</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project — Will Yang Studio</title>
+<meta name="description" content="A project by Will Yang Studio.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/sticky-header.css">
+<meta name="theme-color" content="#F2C534">
+<style>@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap');:root{--ink:#202020;--brand:#F2C534;--muted:#77746C;--soft:#F6F5F0;--edge:clamp(24px,4.8vw,70px);--gap:clamp(20px,3.4vw,52px)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#fff;font-family:'DM Sans',Arial,sans-serif}.header{padding:48px var(--edge);display:flex;align-items:flex-start;justify-content:space-between}.name,.nav{text-transform:uppercase;font-weight:400}.name{font-size:clamp(22px,2.2vw,35px);line-height:.9;letter-spacing:.045em;white-space:nowrap}.nav{display:flex;gap:clamp(22px,4vw,64px);font-size:clamp(14px,1.25vw,19px);line-height:1}.nav a{position:relative;color:inherit;text-decoration:none}.nav a.active:after{content:'';position:absolute;left:0;right:0;bottom:-10px;height:2px;background:var(--brand)}main{padding:clamp(55px,10vw,150px) var(--edge) 14vw}.hero{height:min(72vw,860px);min-height:330px;background:var(--soft);position:relative;overflow:hidden;display:grid;place-items:center}.object{width:clamp(190px,34vw,500px);height:clamp(150px,28vw,390px);background:var(--tone,#315f45);border-radius:48% 52% 32% 38%;box-shadow:inset -28px -22px 28px #0002,0 25px 35px #0002;transform:rotate(var(--angle,-4deg));position:relative}.object:before{content:'';position:absolute;width:74%;height:17%;left:13%;top:42%;border-radius:50%;background:#ffffff60}.object:after{content:'';position:absolute;width:19%;height:19%;border-radius:50%;right:13%;bottom:18%;background:var(--brand)}.headline{display:grid;grid-template-columns:1fr auto;gap:24px;padding:18px 0 78px;border-bottom:1px solid var(--ink)}h1{font-size:clamp(38px,6.1vw,92px);font-weight:400;letter-spacing:-.055em;line-height:.92;margin:0}.meta{padding-top:8px;text-align:right;font-size:13px;line-height:1.6;color:var(--muted)}.intro{padding:clamp(55px,9vw,130px) 0;max-width:960px;font-size:clamp(25px,3.35vw,52px);line-height:1.06;letter-spacing:-.04em}.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-bottom:var(--gap)}.visual{min-height:clamp(260px,36vw,560px);background:var(--soft);overflow:hidden;position:relative;display:grid;place-items:center}.visual.wide{grid-column:1/-1;min-height:clamp(300px,52vw,760px)}.visual .object{transform:rotate(var(--angle,-4deg)) scale(.75)}.visual:nth-child(2) .object{border-radius:8% 47% 20% 46%;background:var(--tone,#315f45)}.visual:nth-child(3) .object{border-radius:50% 50% 8% 8%;background:var(--tone,#315f45)}.caption{max-width:520px;margin:28px 0 clamp(80px,13vw,180px);font-size:clamp(16px,1.5vw,21px);line-height:1.45}.details{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);border-top:1px solid var(--ink);padding-top:20px;margin-bottom:clamp(90px,14vw,200px)}.details h2{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:400;margin:0 0 10px}.details p{margin:0;font-size:15px;line-height:1.45}.next{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--ink);padding-top:22px;text-decoration:none;color:var(--ink);font-size:clamp(20px,2.2vw,30px)}.next span:last-child{width:14px;height:14px;border-radius:50%;background:var(--brand)}@media(max-width:680px){.header{padding-top:30px}.nav{gap:18px;font-size:14px}.headline{grid-template-columns:1fr;padding-bottom:48px}.meta{text-align:left;padding-top:0}.project-grid{grid-template-columns:1fr}.visual.wide{grid-column:auto}.details{grid-template-columns:1fr;gap:28px}}</style>
+<style>
+/* Project-page information hierarchy */
+.project-summary{display:block;width:calc(100% - clamp(36px,9vw,150px));max-width:1080px;margin:0 auto;padding:clamp(68px,10vw,150px) 0 clamp(58px,9vw,130px)}
+.headline{display:block;padding:0;border:0}
+.headline h1{font-size:clamp(32px,3.45vw,52px);font-weight:500;line-height:1.03;letter-spacing:-.045em}
+.meta{display:none}
+.intro{max-width:760px;margin:22px 0 0;padding:0;font-size:clamp(16px,1.28vw,19px);font-weight:400;line-height:1.52;letter-spacing:-.012em}
+.details{width:calc(100% - clamp(36px,9vw,150px));max-width:1080px;margin:0 auto clamp(65px,10vw,140px);border-top:0;padding-top:0}
+.details h2{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:22px}
+.details p{font-size:15px;line-height:1.52}
+.next{border-top:0;padding-top:0;margin-bottom:clamp(80px,12vw,160px);font-size:clamp(17px,1.5vw,22px)}
+.site-footer{height:440px;overflow:hidden;position:relative;display:flex;justify-content:center;align-items:flex-end;text-align:center}.footer-arc{position:absolute;width:min(780px,78vw);height:min(390px,39vw);min-height:280px;border:1px solid var(--ink);border-bottom:0;border-radius:50% 50% 0 0;bottom:0;left:50%;transform:translateX(-50%)}.footer-content{position:relative;z-index:1;padding-bottom:54px}.footer-nav{display:flex;justify-content:center;gap:clamp(20px,3vw,43px);font-size:13px;text-transform:uppercase}.footer-nav a{color:inherit;text-decoration:none}.footer-content p{margin:47px 0 0;font-size:11px}
+@media(min-width:681px){.project-summary,.details{max-width:none}}
+@media(max-width:680px){.project-summary{width:100%;padding:60px 0}.details{width:100%}.headline h1{font-size:32px}.details h2{margin-bottom:10px}.site-footer{height:300px}.footer-arc{width:120vw;height:250px}.footer-content{padding-bottom:34px}.footer-content p{margin-top:30px}}
+.project-grid.real-stack{display:block}.project-grid.real-stack .visual{width:100%;min-height:0;margin:0 0 var(--gap);background:var(--soft)}.project-grid.real-stack .visual img{width:100%;height:auto;display:block}
+</style>
+</head>
+<body>
+<header class="header">
+<a class="name" href="index.html" aria-label="Will Yang Studio home" style="color:inherit;text-decoration:none">Will Yang Studio</a>
+<nav class="nav">
+<a class="active" href="index.html">Works</a>
+<a href="news.html">News</a>
+<a href="about.html">About</a>
+</nav>
+</header>
+<main>
+<section class="hero">
+<i class="object" id="hero-object">
+</i>
+</section>
+<section class="project-summary">
+<section class="headline">
+<h1 id="title">
+</h1>
+<p class="meta" id="meta">
+</p>
+</section>
+<p class="intro" id="intro">
+</p>
+</section>
+<section class="details">
+<div>
+<h2>Client</h2>
+<p id="client">
+</p>
+</div>
+<div>
+<h2>Scope</h2>
+<p>Industrial design<br>CMF direction<br>Production development</p>
+</div>
+<div>
+<h2>Year</h2>
+<p id="year">
+</p>
+</div>
+</section>
+<section class="project-grid">
+<div class="visual wide">
+<i class="object" id="v1">
+</i>
+</div>
+<div class="visual">
+<i class="object" id="v2">
+</i>
+</div>
+<div class="visual">
+<i class="object" id="v3">
+</i>
+</div>
+</section>
+<p class="caption" id="caption">
+</p>
+</main>
+<a id="next" hidden></a>
+<script>const projectId=window.__projectId??new URLSearchParams(location.search).get('id');if(projectId==='0'&&location.pathname.endsWith('/project.html'))location.replace('/nitecore-hc65-uhe/')</script>
+<script>const projects={0:{name:'HC65 UHE',brand:'NITECORE',year:'2024'},50:{name:'P1S',brand:'SYNCO',year:'2021'},51:{name:'PL8-R',brand:'COLBOR',year:'2020'},52:{name:'CL60',brand:'COLBOR',year:'2021'},53:{name:'MC2',brand:'SYNCO',year:'2021'}};const id=Number(projectId);if(!projects[id])location.replace('/index.html');const project=projects[id]||projects[0];document.title=project.name+' — Will Yang Studio';document.querySelector('#title').textContent=project.name;document.querySelector('#intro').textContent=project.name+' is a project developed for '+project.brand+'. This first website edit presents the project imagery in its original MasterGo order.';document.querySelector('#client').textContent=project.brand;document.querySelector('#year').textContent=project.year;</script>
+<script>if(projectId==='0'){const assetVersion='b69f761',assets=['02-render-alpha.png','03-detail-alpha.png','04-angle-alpha.png','05-process-alpha.png','06-final-alpha.png'];document.title='HC65 UHE — Will Yang Studio';document.querySelector('#title').textContent='HC65 UHE';document.querySelector('#intro').textContent='HC65 UHE is a headlamp project developed for NITECORE. This first website edit presents an initial sequence of product and concept images from the project.';document.querySelector('#client').textContent='NITECORE';document.querySelector('#year').textContent='2024';const hero=document.querySelector('.hero');hero.style.cssText='height:auto;min-height:0;display:block';hero.innerHTML='<img src="/assets/hc65-uhe/01-cover-alpha.png?v='+assetVersion+'" alt="HC65 UHE" style="width:100%;height:auto;display:block">';const grid=document.querySelector('.project-grid');grid.classList.add('real-stack');grid.innerHTML=assets.map((asset,i)=>'<div class="visual"><img src="/assets/hc65-uhe/'+asset+'?v='+assetVersion+'" alt="HC65 UHE image '+(i+2)+'"></div>').join('');document.querySelector('#caption').hidden=true}</script>
+<script>if(projectId==='50'){const base='/assets/projects/210805-synco-p1s/',assets=['02@1x.jpg','03@1x.jpg','04@1x.jpg','05@1x.jpg','06@1x.jpg','07@1x.jpg'];document.title='P1S — Will Yang Studio';document.querySelector('#title').textContent='P1S';document.querySelector('#intro').textContent='P1S is a project developed for SYNCO. This first website edit presents the project imagery in its original MasterGo order.';document.querySelector('#client').textContent='SYNCO';document.querySelector('#year').textContent='2021';const hero=document.querySelector('.hero');hero.style.cssText='height:auto;min-height:0;display:block';hero.innerHTML='<img src="'+base+'01@1x.jpg" alt="SYNCO P1S" style="width:100%;height:auto;display:block">';const grid=document.querySelector('.project-grid');grid.classList.add('real-stack');grid.innerHTML=assets.map((asset,i)=>'<div class="visual"><img src="'+base+asset+'" alt="SYNCO P1S image '+(i+2)+'"></div>').join('');document.querySelector('#caption').hidden=true}</script>
+<script>const textBlocks=[...document.querySelectorAll('.project-summary,.details')],syncTextBlocks=()=>{const hero=document.querySelector('.hero'),heroWidth=hero?.getBoundingClientRect().width||0;if(innerWidth<=680||!heroWidth){textBlocks.forEach(block=>block.style.removeProperty('width'));return}const textWidth=Math.min(1440,heroWidth-72,Math.max(1080,heroWidth*.75));textBlocks.forEach(block=>block.style.width=`min(calc(100% - clamp(36px, 9vw, 150px)), ${Math.round(textWidth)}px)`)};document.querySelectorAll('main .hero img,main .project-grid img').forEach(image=>{const fit=()=>{const frame=image.closest('.hero,.visual');if(!frame||!image.naturalWidth)return;const nativeCssWidth=Math.round(image.naturalWidth/window.devicePixelRatio);frame.style.width=`min(100%, ${nativeCssWidth}px)`;frame.style.maxWidth='100%';frame.style.marginInline='auto';image.style.width='100%';image.style.height='auto';requestAnimationFrame(syncTextBlocks)};image.complete?fit():image.addEventListener('load',fit,{once:true})});addEventListener('resize',()=>requestAnimationFrame(syncTextBlocks));requestAnimationFrame(syncTextBlocks)</script>
+<script>if(new URLSearchParams(location.search).get('id')==='51'){const base='assets/projects/201201-colbor-pl8-r/',assets=['01@1x.webp','02@1x.webp','03@1x.webp','04@1x.webp','05@1x.webp','06@1x.webp','07@1x.webp','08@1x.webp','09@1x.webp'];document.title='PL8-R — Will Yang Studio';document.querySelector('#title').textContent='PL8-R';document.querySelector('#intro').textContent='PL8-R is a project developed for COLBOR. This first website edit presents the project imagery in its original MasterGo order.';document.querySelector('#client').textContent='COLBOR';document.querySelector('#year').textContent='2020';const hero=document.querySelector('.hero');hero.style.cssText='height:auto;min-height:0;display:block';hero.innerHTML='<img src="'+base+'00@1x.webp" alt="COLBOR PL8-R" style="width:100%;height:auto;display:block">';const grid=document.querySelector('.project-grid');grid.classList.add('real-stack');grid.innerHTML=assets.map((asset,i)=>'<div class="visual"><img src="'+base+asset+'" alt="COLBOR PL8-R image '+(i+1)+'"></div>').join('');document.querySelector('#caption').hidden=true}</script>
+<script>if(new URLSearchParams(location.search).get('id')==='52'){const base='assets/projects/210825-colbor-cl60/',assets=['02@1x.webp','03@1x.webp','04@1x.webp'];document.title='CL60 — Will Yang Studio';document.querySelector('#title').textContent='CL60';document.querySelector('#intro').textContent='CL60 is a project developed for COLBOR. This first website edit presents the project imagery in its original MasterGo order.';document.querySelector('#client').textContent='COLBOR';document.querySelector('#year').textContent='2021';const hero=document.querySelector('.hero');hero.style.cssText='height:auto;min-height:0;display:block';hero.innerHTML='<img src="'+base+'01@1x.webp" alt="COLBOR CL60" style="width:100%;height:auto;display:block">';const grid=document.querySelector('.project-grid');grid.classList.add('real-stack');grid.innerHTML=assets.map((asset,i)=>'<div class="visual"><img src="'+base+asset+'" alt="COLBOR CL60 image '+(i+2)+'"></div>').join('');document.querySelector('#caption').hidden=true}</script>
+<script>if(new URLSearchParams(location.search).get('id')==='53'){const base='assets/projects/210112-synco-mc2/',assets=['02@1x.webp','03@1x.webp','04@1x.webp','05@1x.webp','06@1x.webp','07@1x.webp'];document.title='MC2 — Will Yang Studio';document.querySelector('#title').textContent='MC2';document.querySelector('#intro').textContent='MC2 is a project developed for SYNCO. This first website edit presents the project imagery in its original MasterGo order.';document.querySelector('#client').textContent='SYNCO';document.querySelector('#year').textContent='2021';const hero=document.querySelector('.hero');hero.style.cssText='height:auto;min-height:0;display:block';hero.innerHTML='<img src="'+base+'01@1x.webp" alt="SYNCO MC2" style="width:100%;height:auto;display:block">';const grid=document.querySelector('.project-grid');grid.classList.add('real-stack');grid.innerHTML=assets.map((asset,i)=>'<div class="visual"><img src="'+base+asset+'" alt="SYNCO MC2 image '+(i+2)+'"></div>').join('');document.querySelector('#caption').hidden=true}</script>
+<footer class="site-footer"><div class="footer-arc"></div><div class="footer-content"><nav class="footer-nav"><a href="index.html">Works</a><a href="news.html">News</a><a href="about.html">About</a></nav><p>Copyright © Will Yang Studio</p></div></footer>
+<script src="/sticky-header.js"></script>
+</body>
+</html>
+
