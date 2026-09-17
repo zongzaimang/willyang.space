@@ -33,8 +33,10 @@ yarn-error.log*
 .vercel
 next-env.d.ts
 /dist/
+/dist-static/
+/.pnpm-store/
+/.sites-runtime/
 /.wrangler/
 /outputs/
 /work/
 mastergo-exports/
-

@@ -1,0 +1,664 @@
+{
+  "assets/hc65-uhe/01-cover-alpha.png": {
+    "hash": "50b38a80dd34bed9925b80d60edd1d174bf3076a38e593458b74a02d0b0798f5",
+    "images": [
+      {
+        "file": "assets/responsive/hc65-uhe--01-cover-alpha-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--01-cover-alpha-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--01-cover-alpha-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "assets/hc65-uhe/02-render-alpha.png": {
+    "hash": "82b1e74af0c2fbd82e676ae9dafc3e1e12731c2947534c4d65b7b4e8c75bf224",
+    "images": [
+      {
+        "file": "assets/responsive/hc65-uhe--02-render-alpha-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--02-render-alpha-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--02-render-alpha-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "assets/hc65-uhe/03-detail-alpha.png": {
+    "hash": "a84c7cd6d2f8115e0481d021d50c62a4c21d52017c700cee68846f9279112f13",
+    "images": [
+      {
+        "file": "assets/responsive/hc65-uhe--03-detail-alpha-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--03-detail-alpha-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--03-detail-alpha-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "assets/hc65-uhe/04-angle-alpha.png": {
+    "hash": "250515a6111a67d00533a987963312c247595453572841b83336a14f6b1a69a5",
+    "images": [
+      {
+        "file": "assets/responsive/hc65-uhe--04-angle-alpha-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--04-angle-alpha-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--04-angle-alpha-1100.webp",
+        "width": 1100
+      }
+    ]
+  },
+  "assets/hc65-uhe/05-process-alpha.png": {
+    "hash": "d96ddae77600958b8f1a72a17d0ef7084cc121d911610ca2dab06f78eafad1d2",
+    "images": [
+      {
+        "file": "assets/responsive/hc65-uhe--05-process-alpha-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--05-process-alpha-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--05-process-alpha-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "assets/hc65-uhe/06-final-alpha.png": {
+    "hash": "6c293e843238addc5a0a77240d6d3330aa166ec2d4df73942b81f10e2b6bd60d",
+    "images": [
+      {
+        "file": "assets/responsive/hc65-uhe--06-final-alpha-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--06-final-alpha-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/hc65-uhe--06-final-alpha-1200.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/00@1x.webp": {
+    "hash": "aa492fda20590cbb17e1ef3bde01d4a7c01e86a68073060327afa4bb68c11e2a",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--00@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--00@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--00@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--00@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/01@1x.webp": {
+    "hash": "fecd77f1c6b0492223f945ccd43553ade3334e86afe39a2c69be4c66f80e9ac9",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--01@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--01@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--01@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--01@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/02@1x.webp": {
+    "hash": "95f8dfec2e302a41a1f6d9b48d1b77bc629f8a3d23ac5e8bd1c11efdb09c546a",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--02@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--02@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--02@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--02@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/03@1x.webp": {
+    "hash": "1d15d480c6e9d7d8372e3074e1a3d044530a42dd00647988e1844e43b842691a",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--03@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--03@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--03@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--03@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/04@1x.webp": {
+    "hash": "2b9893a1182517b25d9ed271c9ce8b48fadd724458fa39c852ab6059a1d2be99",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--04@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--04@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--04@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--04@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/05@1x.webp": {
+    "hash": "879c4805c24e51c2c5413a778fb10b19cec716902f595124712d742ad4cd387b",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--05@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--05@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--05@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--05@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/06@1x.webp": {
+    "hash": "d81761b9dd20ca45ffbfca260d680124690229602ea718b097942aee3c58516a",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--06@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--06@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--06@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--06@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/07@1x.webp": {
+    "hash": "7ec316b17859a7a0698a88f3357c60324f8f3837f7a7483dadcbf18eb7d0a606",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--07@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--07@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--07@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--07@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/08@1x.webp": {
+    "hash": "51a06e237ab3e43caf11dbc138396de686edf38e89db82ed346d0ee410f58659",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--08@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--08@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--08@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--08@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/201201-colbor-pl8-r/09@1x.webp": {
+    "hash": "2a0737d4428026566c0e92b1b2b27e22333f6d987a9920894ee236b91ed21579",
+    "images": [
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--09@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--09@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--09@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--201201-colbor-pl8-r--09@1x-1950.webp",
+        "width": 1950
+      }
+    ]
+  },
+  "assets/projects/210112-synco-mc2/01@1x.webp": {
+    "hash": "c32babbe2b3e384467d67f0fc61894b28c81d6f10fdc66d91c7debc221be8532",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--01@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--01@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--01@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--01@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210112-synco-mc2/02@1x.webp": {
+    "hash": "abb0fb98a75f5f9a816cbf89056f066d8d2a36b367e5e8161d8bb5ff267fd5b4",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--02@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--02@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--02@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--02@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210112-synco-mc2/03@1x.webp": {
+    "hash": "cf17c410bbf28b5cbb8d5087222cfc53ceb2f07d6b96fc10ac4c9e6b152e0879",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--03@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--03@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--03@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--03@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210112-synco-mc2/04@1x.webp": {
+    "hash": "35cbcfca6277cdbfbf4d62a0fc293ff057b98d537e5f1510b10478b0a6f7c8e8",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--04@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--04@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--04@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--04@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210112-synco-mc2/05@1x.webp": {
+    "hash": "37923f4286b77ee935572525704cc3840e296d3521bb47a9228c6e2bf64cbcbd",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--05@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--05@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--05@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--05@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210112-synco-mc2/06@1x.webp": {
+    "hash": "d43ef4d7b9b5c337bf0e8441320c840898a0bcd6e0e82bbba4d4617a1c14d646",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--06@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--06@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--06@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--06@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210112-synco-mc2/07@1x.webp": {
+    "hash": "cd5ca628dad3fa754fa35240d353185b83e19e4654787f9004e653b6b6efff10",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--07@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--07@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--07@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210112-synco-mc2--07@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210805-synco-p1s/01@1x.jpg": {
+    "hash": "728641ea6e354f321c7518fa84708d5b4ff1ea5aa2d652daf68d63b2bfdb8192",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--01@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--01@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--01@1x-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "assets/projects/210805-synco-p1s/02@1x.jpg": {
+    "hash": "5847f28c7c7cfab7181b5797932fec6c75747bfacdc7bf20f229a91a310ac0be",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--02@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--02@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--02@1x-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "assets/projects/210805-synco-p1s/03@1x.jpg": {
+    "hash": "a186844518bd62cc79546df319cbc9138f28bb782b42d233d42dc675983c4783",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--03@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--03@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--03@1x-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "assets/projects/210805-synco-p1s/04@1x.jpg": {
+    "hash": "4592e3e37d0629891d6d9274eb76958d5afb5c4ad6557b963f186985444e1436",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--04@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--04@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--04@1x-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "assets/projects/210805-synco-p1s/05@1x.jpg": {
+    "hash": "29011b6648e1845d1bc94eee0ad0b4da883a50f31909e936be7bd8dbdfc2bcc0",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--05@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--05@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--05@1x-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "assets/projects/210805-synco-p1s/06@1x.jpg": {
+    "hash": "874bebe8ee9ce665b796094a8d6748cdfb7d674bc40ece01dad5e92d87b9b597",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--06@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--06@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--06@1x-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "assets/projects/210805-synco-p1s/07@1x.jpg": {
+    "hash": "80b0da41471410194b8d60fe2b85efb6d9ae863759b16c99a6746c2eb50f181f",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--07@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--07@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210805-synco-p1s--07@1x-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "assets/projects/210825-colbor-cl60/01@1x.webp": {
+    "hash": "aa6cc80a473755061431c8f0c6f13fa3259ebea92a3494d39b8cf0fb7923953f",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--01@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--01@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--01@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--01@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210825-colbor-cl60/02@1x.webp": {
+    "hash": "31062e2d4e6cab6f81e2bf986b65c28d3bc1ea08e127fea9492b06635b376651",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--02@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--02@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--02@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--02@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210825-colbor-cl60/03@1x.webp": {
+    "hash": "016dd12e1fa470a0a415bf346e6ae162cce3e1353187c4fa6381f8f8457ba435",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--03@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--03@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--03@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--03@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  },
+  "assets/projects/210825-colbor-cl60/04@1x.webp": {
+    "hash": "a5d5d7ea1a7a2daf6fd6486068a73526e29a716967ff91ef0101ac47571a5b40",
+    "images": [
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--04@1x-480.webp",
+        "width": 480
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--04@1x-960.webp",
+        "width": 960
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--04@1x-1600.webp",
+        "width": 1600
+      },
+      {
+        "file": "assets/responsive/projects--210825-colbor-cl60--04@1x-1920.webp",
+        "width": 1920
+      }
+    ]
+  }
+}
