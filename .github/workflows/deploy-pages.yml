@@ -3,33 +3,114 @@ name: Deploy GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
+    inputs:
+      rollback_run_id:
+        description: 'Optional successful deployment run ID whose site-release artifact should be restored'
+        required: false
+        type: string
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  actions: read
 
 concurrency:
-  group: pages
+  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'production' }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Generate static portfolio
-        run: node tools/build-site.mjs --dist
-      - uses: actions/configure-pages@v5
+      - name: Validate content and publishing lifecycle
+        if: ${{ !inputs.rollback_run_id }}
+        run: |
+          node tools/check-content.mjs
+          node --test tools/tests/publishing.test.mjs
+          node tools/build-site.mjs
+      - name: Install browser test dependencies
+        if: ${{ !inputs.rollback_run_id }}
+        uses: pnpm/action-setup@v4
+      - name: Install locked dependencies and Chromium
+        if: ${{ !inputs.rollback_run_id }}
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec playwright install --with-deps chromium
+      - name: Verify browser interactions
+        if: ${{ !inputs.rollback_run_id }}
+        run: |
+          node tools/tests/images.mjs
+          node tools/tests/browser.mjs
+      - name: Check rollback source
+        if: ${{ inputs.rollback_run_id }}
+        uses: actions/github-script@v7
+        env:
+          ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
+        with:
+          script: |
+            if (!/^\d+$/.test(process.env.ROLLBACK_RUN_ID)) throw new Error('Invalid run ID');
+            const {data: run} = await github.rest.actions.getWorkflowRun({
+              ...context.repo, run_id: Number(process.env.ROLLBACK_RUN_ID)
+            });
+            if (run.conclusion !== 'success' || run.head_branch !== 'main' ||
+                run.path !== '.github/workflows/deploy-pages.yml' ||
+                !['push', 'workflow_dispatch'].includes(run.event)) {
+              throw new Error('Rollback source must be a successful main deployment');
+            }
+      - name: Download exact rollback artifact
+        if: ${{ inputs.rollback_run_id }}
+        uses: actions/download-artifact@v4
+        with:
+          name: site-release
+          path: dist-static
+          run-id: ${{ inputs.rollback_run_id }}
+          github-token: ${{ github.token }}
+      - name: Verify release checksums and links
+        run: node tools/release.mjs verify
+      - name: Keep a recoverable release
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-release
+          path: dist-static
+          include-hidden-files: true
+          retention-days: 30
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
           path: dist-static
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-release
+          path: dist-static
+      - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify deployed pages and assets
+        env:
+          DEPLOYED_URL: ${{ steps.deployment.outputs.page_url }}
+        run: node tools/verify-live.mjs "$DEPLOYED_URL"

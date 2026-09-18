@@ -1,75 +1,70 @@
-# MasterGo 内容获取与发布规则
+# MasterGo → 网站内容发布
 
-MasterGo 是 Will Yang Studio 项目资料的主内容源。日常项目中的草图、渲染、实拍、模型截图与过程推演继续保留在原有大白板中；网站只读取专门整理的展示页面。
+## 来源与责任
 
-## 页面用途
+创作资料继续保留在 MasterGo。每个项目建立“网站”页面，多项目文件可使用“项目名称 + 网站”。只有已确认可公开的内容放入该页面。页面名称不决定网站顺序。
 
-每个准备收录到个人作品集的网站项目，应在对应 MasterGo 项目中建立一个“网站”页面。
+网站内容文件是经过整理确认的发布版本，MasterGo 是创作与精选素材来源。项目中记录来源文件名、页面名称和实际分享链接，素材导入自动记录时间与哈希。未经实际读取的资料不补写，不根据模板推断真实项目职责。
 
-该页面是对外作品集的精选出口，不替代项目过程页面。
+## 新建项目
 
-内容建议按展示顺序组织：
+```sh
+node tools/project.mjs new 260918-brand-model
+```
 
-1. 项目封面（优先 16:9）
-2. 项目信息：名称、品牌、年份、类别
-3. 项目简介
-4. 展示图片：渲染、实拍、过程图、模型截图等
-5. 必要的图片说明
+编辑 `content/projects/260918-brand-model/project.json`：填写品牌、型号、开始日期、简介、真实服务范围和来源链接。`startedAt` 控制作品排序，公开地址为 `/<slug>/`。
 
-只有标记为可发布的内容才应放入该页面；草图、备选稿和内部资料保留在其他页面。
+## 导出与导入
 
-## 页面命名
+1. 在 MasterGo 网站页面整理切片。
+2. 使用 `01.png`、`02.png`…，或 `01@1x.jpg` 等数字命名。同一序号只能有一张图片。
+3. `00` 是可选独立封面；`01` 必须存在，作为第一张详情图。没有 `00` 时，`01` 也作为封面。透明素材使用 PNG 或保留透明通道的 WebP。
+4. 导出到 `mastergo-exports/<项目ID>/`。此目录只在本地保留，不进入 Git 或发布包。
+5. 查看差异：
 
-- 默认名称：`网站`
-- 当同一 MasterGo 项目中存在多个网站展示页面，使用：`项目名称 + 网站`
+```sh
+node tools/project.mjs import 260918-brand-model mastergo-exports/260918-brand-model
+```
 
-示例：
+6. 确认新增、替换、改名和移除清单后，执行相同命令并增加 `--apply`。
 
-- `电子通行证 Max 网站`
-- `HC65 UHE 网站`
+PowerShell 兼容入口仍可使用：
 
-MasterGo 页面依靠创建时间与手动拖动顺序管理，不按名称排序。因此不使用 `00 —` 等排序前缀；需要时将“网站”页面手动拖至易访问的位置。
+```powershell
+./tools/sync-mastergo-project.ps1 -ProjectId '260918-brand-model' -Source 'mastergo-exports/260918-brand-model'
+```
 
-## 发布流程
+加 `-Apply` 才会应用。每次导入会将素材存为不可变快照并更新项目清单，旧文件保留以便恢复；未引用的旧文件不再发布。图片说明按内容哈希保留，替换成新图片时应重新检查说明。导入会以本次完整导出重新决定封面和顺序，手工调整请在导入后完成。
 
-1. 在 MasterGo 的“网站”页面完成精选内容与排序。
-2. 将该页面设为可发布，并提供其网页分享链接或在网页版打开。
-3. Codex 读取页面中的文字与素材，整理为网站项目页。
-4. 图片导出、下载或上传到 GitHub 前，需要用户确认相应外部操作。
-5. 网站发布后，保留 MasterGo 页面作为后续更新的唯一内容依据。
+## 检查与发布
 
-## 权限与自动化边界
+```sh
+pnpm run images
+node tools/project.mjs status 260918-brand-model ready
+pnpm run dev:drafts
+```
 
-- 个人免费版当前采用“分享页面 + Codex 整理发布”的半自动方式。
-- 个人免费版不具备 Magic MCP 的远程自动读取权限；该能力需要团队版及以上权限。
-- 后续若升级并启用 MasterGo MCP，可评估从“网站”页面自动读取结构化内容，以减少人工整理。
-# MasterGo → Will Yang Studio publishing workflow
+确认封面、排序、说明、透明效果和可公开范围，再执行：
 
-## Source of truth
+```sh
+node tools/project.mjs status 260918-brand-model published
+pnpm run check
+pnpm test
+pnpm run build
+pnpm run test:browser
+```
 
-- MasterGo is the creative source of truth.
-- Each project uses a page named `网站`; when a file needs several website pages, use `项目名称 + 网站`.
-- Page order is manually arranged in MasterGo; names do not determine its order.
+之后审阅 Git 差异并按 README 的发布流程上线。已经发布的项目导入新素材不会自动上传或部署，但下次正式构建会采用新清单。
 
-## Project ID and metadata
+## 撤下与恢复
 
-- Parse the MasterGo file title as: `YYMMDD BRAND MODEL`.
-- Convert `YYMMDD` to `YYYY-MM-DD` and store it as `startedAt`. It controls Works sorting, newest first, even though the page only shows the year.
-- Example: `240129 NITECORE HC65 UHE` → `id: 240129-nitecore-hc65-uhe`, `startedAt: 2024-01-29`, brand `NITECORE`, model `HC65 UHE`.
-- Record every published project in `content/projects.json`.
-- Set `slug` to the lowercase `brand-model` form (for example, `nitecore-hc65-uhe`) and assign its `detailId`. The public project URL is always `/<slug>/`; the date-prefixed project ID remains internal metadata only.
+```sh
+node tools/project.mjs status 260918-brand-model archived
+pnpm run build
+```
 
-## Export only once per update
+重新发布这个产物后，项目页面与无其他引用的图片从站点移除，本地原件仍在。部署不能删除访问者此前下载的文件或立即清除所有第三方缓存。
 
-1. In the project’s `网站` page, mark each selected container as an export slice.
-2. Use the default numeric order only: `01.png`, `02.png`, `03.png`, `04.png` … MasterGo’s default `01@1x.jpg` form is also accepted. `01` is the default Works cover and the first detail image. If `00` exists, it is a dedicated 16:9 Works cover only; details still start at `01`. Every following image is shown vertically in number order. Do not place alternative JPG/WebP/PNG versions of the same number in this export folder.
-3. Use PNG or lossless WebP for transparent artwork. Do not use JPG when transparency matters.
-4. Run MasterGo “Export all slices” (`Shift + Ctrl + E` on Windows) and export to the project source folder:
-   `mastergo-exports/<project-id>/`
-5. Preview changes locally:
-   `./tools/sync-mastergo-project.ps1 -ProjectId '<project-id>' -Source 'mastergo-exports/<project-id>'`
-6. If the list is correct, run the same command with `-Apply`, then tell Codex: `同步 <project-id>`.
-7. After adding a new project record or changing a slug, run `./tools/generate-project-pages.ps1` to generate the static project URL.
+恢复项目需检查内容后依次标记 `ready`、`published`。若要恢复整站历史产物，使用 README 中的发布包回滚流程。
 
-`mastergo-exports/` is your local source archive and is ignored by Git. The script only copies new or changed files into the publish folder, so replacing one image in MasterGo updates only that image in the website asset folder.
-
+所有本地脚本只读取已导出的素材，不自动获取 MasterGo 权限，也不执行外部导出或上传。

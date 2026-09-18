@@ -1,0 +1,23 @@
+{
+  "name": "Will Yang Studio",
+  "namePrimary": "Will Yang",
+  "nameSuffix": "Studio",
+  "discipline": "Industrial design",
+  "email": "hello@wenyang.design",
+  "origin": "https://willyang.space",
+  "lang": "en",
+  "navigation": [
+    {
+      "label": "Works",
+      "url": "/index.html"
+    },
+    {
+      "label": "News",
+      "url": "/news.html"
+    },
+    {
+      "label": "About",
+      "url": "/about.html"
+    }
+  ]
+}

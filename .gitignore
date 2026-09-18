@@ -34,6 +34,13 @@ yarn-error.log*
 next-env.d.ts
 /dist/
 /dist-static/
+/dist-preview/
+/dist-static.building/
+/dist-static.previous/
+/dist-preview.building/
+/dist-preview.previous/
+/releases/
+*.incoming
 /.pnpm-store/
 /.sites-runtime/
 /.wrangler/

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "coming-soon",
+    "status": "published",
+    "label": "Coming soon",
+    "lang": "zh-CN",
+    "body": "新项目、展览、合作与制作过程会在这里更新。"
+  },
+  {
+    "id": "archive",
+    "status": "published",
+    "label": "Archive",
+    "lang": "zh-CN",
+    "body": "正在整理 Will Yang Studio 的设计记录。"
+  }
+]
