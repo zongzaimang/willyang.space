@@ -12,7 +12,7 @@
 node tools/project.mjs new 260918-brand-model
 ```
 
-编辑 `content/projects/260918-brand-model/project.json`：填写品牌、型号、开始日期、简介、真实服务范围和来源链接。`startedAt` 控制作品排序，公开地址为 `/<slug>/`。
+命令会在根目录 `_projects` 新建一份草稿 Markdown。将文件改名为易读的 `YYMMDD 品牌 型号.md`，再填写品牌、型号、日期、简介、真实服务范围和来源链接。`date` 控制作品排序，公开地址为 `/<slug>/`；稳定身份由 front matter 中的 `id` 决定，不依赖文件名。
 
 ## 导出与导入
 
@@ -34,7 +34,7 @@ PowerShell 兼容入口仍可使用：
 ./tools/sync-mastergo-project.ps1 -ProjectId '260918-brand-model' -Source 'mastergo-exports/260918-brand-model'
 ```
 
-加 `-Apply` 才会应用。每次导入会将素材存为不可变快照并更新项目清单，旧文件保留以便恢复；未引用的旧文件不再发布。图片说明按内容哈希保留，替换成新图片时应重新检查说明。导入会以本次完整导出重新决定封面和顺序，手工调整请在导入后完成。
+加 `-Apply` 才会应用。每次导入会将素材存为 `assets/projects/<项目ID>/imports/<版本>/` 下的不可变快照，并直接更新对应 Markdown 的封面、图片顺序和来源版本。旧文件保留以便恢复；未被 Markdown 引用的旧文件不再发布。图片说明按内容哈希保留，替换成新图片时应重新检查说明。导入会以本次完整导出重新决定封面和图片顺序，其他正文保留，手工调整请在导入后完成。
 
 ## 检查与发布
 

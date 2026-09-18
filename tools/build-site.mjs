@@ -11,28 +11,48 @@ export function buildSite(workspace=root,{preview=false}={}) {
   content.projects=content.projects.filter(p=>p.status==='published'||(preview && ['draft','ready'].includes(p.status)));
   content.news=content.news.filter(n=>n.status==='published'||(preview&&['draft','ready'].includes(n.status)));
   content.projects.forEach(p=>validateProject(workspace,p,true));
-  const sources=new Set(content.projects.flatMap(p=>[p.cover.file,...p.images.map(i=>i.file)]));
+  const assetCopies=new Map();
+  const addAsset=(destination,source)=>{
+    if(assetCopies.has(destination)&&assetCopies.get(destination)!==source)throw new Error(`Published asset collision: ${destination}`);
+    assetCopies.set(destination,source);
+  };
+  content.projects=content.projects.map(project=>{
+    const imageMap=new Map();
+    const prepare=item=>{
+      const sourceFile=item.file,file=item.file;
+      addAsset(file,sourceFile);
+      const prepared={...item,file,sourceFile};
+      imageMap.set(sourceFile,prepared);
+      return prepared;
+    };
+    const cover=prepare(project.cover);
+    const images=project.images.map(prepare);
+    const bodyBlocks=project.bodyBlocks?.map(block=>block.type==='image'?{...block,image:imageMap.get(block.image.file)}:block);
+    return {...project,cover,images,bodyBlocks};
+  });
   const variantFile=path.join(workspace,'content/image-variants.json');
   const registry=fs.existsSync(variantFile)?readJSON(variantFile):{};
   const variants={};
-  for(const file of sources) {
-    const entry=registry[file];
-    if(!entry || entry.hash!==hash(fs.readFileSync(within(workspace,file)))) continue;
+  for(const [file,sourceFile] of assetCopies) {
+    const entry=registry[sourceFile];
+    if(!entry || entry.hash!==hash(fs.readFileSync(within(workspace,sourceFile)))) continue;
     if(!Array.isArray(entry.images)||!entry.images.length) continue;
     const valid=entry.images.every(v=>{
       if(!/^assets\/responsive\/[a-zA-Z0-9_@./-]+\.webp$/.test(v.file)) throw new Error(`Unsafe responsive image: ${v.file}`);
       const full=within(workspace,v.file);
       return Number.isInteger(v.width)&&v.width>0&&fs.existsSync(full)&&dimensions(full)[0]===v.width;
     });
-    if(valid) variants[file]=entry;
+    if(valid) {
+      variants[file]=entry;
+      for(const responsive of entry.images)addAsset(responsive.file,responsive.file);
+    }
   }
   const output=render(workspace,content,variants);
   if(preview) for(const [file,html] of output) output.set(file,html.replace('<head>','<head><meta name="robots" content="noindex,nofollow">'));
-  const assets=new Set([...sources,...Object.values(variants).flatMap(v=>v.images.map(i=>i.file))]);
   const release=replaceOutput(workspace,preview?'dist-preview':'dist-static',folder=>{
     for(const [file,html] of output) { const target=within(folder,file); fs.mkdirSync(path.dirname(target),{recursive:true}); fs.writeFileSync(target,html); }
-    for(const file of ['site.css','site.js','theme.js','favicon.svg',...assets]) {
-      const target=within(folder,file); fs.mkdirSync(path.dirname(target),{recursive:true}); fs.copyFileSync(within(workspace,file),target);
+    for(const [file,sourceFile] of new Map([['site.css','site.css'],['site.js','site.js'],['theme.js','theme.js'],['favicon.svg','favicon.svg'],...assetCopies])) {
+      const target=within(folder,file); fs.mkdirSync(path.dirname(target),{recursive:true}); fs.copyFileSync(within(workspace,sourceFile),target);
     }
     fs.writeFileSync(path.join(folder,'CNAME'),new URL(content.site.origin).hostname+'\n');
     fs.writeFileSync(path.join(folder,'.nojekyll'),'');

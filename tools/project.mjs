@@ -1,34 +1,49 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {parse as parseYAML,stringify as stringifyYAML} from 'yaml';
 import {hash,readJSON,writeJSON,within,validateProject,loadContent,states,dimensions} from './lib/content.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const safeId=id=>{if(!/^\d{6}-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id??'')) throw new Error('Project ID must be YYMMDD-brand-model');return id;};
-const projectFile=(workspace,id)=>within(workspace,`content/projects/${safeId(id)}/project.json`);
+const projectRecord=(workspace,id)=>{
+  safeId(id);
+  const project=loadContent(workspace).projects.find(item=>item.id===id);
+  if(!project)throw new Error(`Project not found: ${id}`);
+  return {project,file:within(workspace,project.sourceFile)};
+};
+const splitMarkdown=file=>{
+  const source=fs.readFileSync(file,'utf8').replace(/^\uFEFF/,'');
+  const match=source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if(!match)throw new Error(`${path.basename(file)} needs YAML front matter`);
+  return {metadata:parseYAML(match[1]),body:match[2]};
+};
+const writeMarkdown=(file,metadata,body)=>fs.writeFileSync(file,`---\n${stringifyYAML(metadata).trimEnd()}\n---\n\n${body.trim()}\n`);
 
 export function newProject(workspace,id) {
-  const file=projectFile(workspace,id);
-  if(fs.existsSync(file)) throw new Error(`Project already exists: ${id}`);
+  safeId(id);
+  if(loadContent(workspace).projects.some(project=>project.id===id)) throw new Error(`Project already exists: ${id}`);
   const slug=id.slice(7);
-  const p={id,status:'draft',slug,aliases:[],legacyIds:[],startedAt:`20${id.slice(0,2)}-${id.slice(2,4)}-${id.slice(4,6)}`,brand:'',model:'',description:'',scope:[],cover:null,images:[],source:{type:'mastergo',fileTitle:'',page:'网站',url:null,importedAt:null,revision:null}};
   const content=loadContent(workspace);
   if(content.projects.some(p=>p.slug===slug||(p.aliases||[]).includes(slug))) throw new Error(`Route already exists: ${slug}`);
-  writeJSON(file,p);
-  return p;
+  const metadata={id,status:'draft',slug,aliases:[],legacyIds:[],date:`20${id.slice(0,2)}-${id.slice(2,4)}-${id.slice(4,6)}`,brand:'',model:'',scope:[],cover:null,source:{type:'mastergo',fileTitle:'',page:'网站',url:null,importedAt:null,revision:null}};
+  const relative=`_projects/${id.slice(0,6)} ${id.slice(7).replaceAll('-',' ')}.md`,file=within(workspace,relative);
+  if(fs.existsSync(file))throw new Error(`Project file already exists: ${relative}`);
+  writeMarkdown(file,metadata,'Add the project introduction here.');
+  return {...metadata,sourceFile:relative};
 }
 export function setStatus(workspace,id,status) {
   if(!states.includes(status)) throw new Error(`Status must be one of: ${states.join(', ')}`);
-  const file=projectFile(workspace,id),p=readJSON(file);
+  const record=projectRecord(workspace,id),file=record.file,p=record.project;
   const before=p.status;
   p.status=status;
   validateProject(workspace,p);
   if(status==='published'&&before!=='ready'&&before!=='published') throw new Error('Mark this project ready and preview it before marking it published.');
-  writeJSON(file,p);
+  const document=splitMarkdown(file);document.metadata.status=status;writeMarkdown(file,document.metadata,document.body);
   return {id,before,status};
 }
 export function importProject(workspace,id,source,{apply=false}={}) {
-  const config=projectFile(workspace,id),p=readJSON(config);
+  const record=projectRecord(workspace,id),config=record.file,p=record.project;
   const sourcePath=path.resolve(workspace,source);
   if(!fs.existsSync(sourcePath)||!fs.statSync(sourcePath).isDirectory()||fs.lstatSync(sourcePath).isSymbolicLink()) throw new Error('Source must be a real export directory');
   const entries=fs.readdirSync(sourcePath,{withFileTypes:true});
@@ -67,9 +82,21 @@ export function importProject(workspace,id,source,{apply=false}={}) {
   p.images=files.filter(f=>f.position>0).map(asImage);
   p.source={...p.source,importedAt:new Date().toISOString(),revision};
   validateProject(workspace,p);
-  // Write a complete record before replacing the old record; an interrupted copy cannot remove old content.
+  const document=splitMarkdown(config);
+  document.metadata.cover='/'+p.cover.file;
+  document.metadata.source=p.source;
+  const regexEscape=value=>value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  let prose=document.body;
+  for(const image of old) {
+    const basename=regexEscape(path.basename(image.file)),full=regexEscape(image.file);
+    prose=prose
+      .replace(new RegExp(`!\\[\\[${basename}(?:\\|[^\\]]+)?\\]\\]`,'g'),'')
+      .replace(new RegExp(`^!\\[[^\\]]*\\]\\(<?\\/?${full}>?\\)\\r?\\n(?:\\r?\\n\\*[^\\r\\n]*\\*\\r?\\n)?(?:\\r?\\n)?`,'gm'),'');
+  }
+  prose=prose.trim();
+  const imageBody=p.images.map(image=>`![${image.alt}](/${image.file})${image.caption?`\n\n*${image.caption}*`:''}`).join('\n\n');
   const temporary=config+'.incoming';
-  writeJSON(temporary,p);
+  writeMarkdown(temporary,document.metadata,`${prose}\n\n${imageBody}`);
   fs.renameSync(temporary,config);
   writeJSON(within(workspace,`outputs/imports/${id}/${revision}.json`),{id,revision,importedAt:p.source.importedAt,source:sourcePath,report});
   return {id,revision,applied:true,report};

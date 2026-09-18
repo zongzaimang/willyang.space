@@ -8,6 +8,7 @@ const manifestPath=path.join(workspace,'content/image-variants.json');
 const manifest=fs.existsSync(manifestPath)?readJSON(manifestPath):{};
 const content=loadContent(workspace);
 const files=new Set(content.projects.filter(p=>p.status!=='archived').flatMap(p=>[p.cover?.file,...p.images.map(i=>i.file)]).filter(Boolean));
+for(const file of Object.keys(manifest))if(!files.has(file))delete manifest[file];
 let generated=0;
 for(const file of files) {
   const full=within(workspace,file),digest=hash(fs.readFileSync(full));

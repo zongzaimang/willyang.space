@@ -13,9 +13,9 @@ try {
   for(const f of ['site.css','site.js','theme.js','favicon.svg','content/site.json','content/news.json','content/pages']) {
     fs.mkdirSync(path.dirname(path.join(dir,f)),{recursive:true});fs.cpSync(path.join(root,f),path.join(dir,f),{recursive:true});
   }
-  const original='assets/projects/test/01.png';
-  const p={id:'260918-test-images',status:'published',slug:'test-images',startedAt:'2026-09-18',brand:'TEST',model:'Images',description:'Image pipeline test',scope:['Test'],cover:{file:original,alt:'Cover'},images:[{file:original,alt:'Image'}]};
-  writeJSON(path.join(dir,`content/projects/${p.id}/project.json`),p);
+  const original='assets/projects/260918-test-images/01.png';
+  fs.mkdirSync(path.join(dir,'_projects'),{recursive:true});
+  fs.writeFileSync(path.join(dir,'_projects/260918 TEST Images.md'),`---\nid: 260918-test-images\nstatus: published\nslug: test-images\naliases: []\nlegacyIds: []\ndate: 2026-09-18\nbrand: TEST\nmodel: Images\nscope: [Test]\ncover: /${original}\n---\n\nImage pipeline test\n\n![Image](/${original})\n`);
   fs.mkdirSync(path.dirname(path.join(dir,original)),{recursive:true});
   await sharp({create:{width:960,height:640,channels:4,background:{r:255,g:0,b:0,alpha:0.5}}}).png().toFile(path.join(dir,original));
   const sourceHash=hash(fs.readFileSync(path.join(dir,original)));

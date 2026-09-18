@@ -4,14 +4,14 @@
 
 ## 环境与常用入口
 
-Node.js >= 22.13，pnpm 11.19.0。正式构建、内容检查及流程测试不需要第三方依赖；图片优化和浏览器测试使用锁定的开发依赖。
+Node.js >= 22.13，pnpm 11.19.0。构建、内容检查、图片优化和浏览器测试均使用锁定的开发依赖。
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm run dev
 ```
 
-打开 `http://127.0.0.1:4173`。内容更新后重新运行 `pnpm run build` 并刷新；服务器只暴露生成目录，不暴露内容源和本地导出资料。
+打开 `http://127.0.0.1:4173`。开发命令只监控 `_projects`、项目图片、页面文案和前端资源；新增、修改或删除项目 Markdown 后会自动校验并重新构建，浏览器手动刷新即可看到结果。构建失败时保留上一次成功预览。服务器只暴露生成目录，不暴露内容源和本地导出资料。
 
 没有包管理器时可直接运行：
 
@@ -50,15 +50,18 @@ content/
   site.json                    品牌、联系方式、域名、导航
   pages/                       Works、About、News、404 等页面文案
   news.json                    动态条目及发布状态
-  projects/<项目ID>/project.json
   image-variants.json          图片工具生成的索引
-assets/                        本地原图与派生图
+_projects/                     唯一项目内容源；每个项目一份 Markdown
+assets/                        Obsidian 粘贴的项目图片附件
+assets/projects/<项目ID>/      迁移期旧图片与 MasterGo 导入快照
+assets/responsive/             自动生成的响应式图片
 tools/
   lib/content.mjs             内容校验、路径检查、图片尺寸读取
   lib/render.mjs              HTML 模板
   lib/artifact.mjs            发布包校验与替换
   project.mjs                 新建、状态与素材导入
   build-site.mjs              正式及草稿构建
+  dev.mjs                     内容监控与本地预览
   release.mjs                 快照、校验与恢复
 legacy/                        历史原型和旧生成页面，不参与发布
 dist-static/                   正式产物，自动生成，不手改
@@ -66,11 +69,17 @@ dist-preview/                  草稿预览，不得发布
 releases/                      本地发布快照，不提交
 ```
 
-项目文案直接编辑 `project.json` 的 `description`、`scope` 和每张图片的 `alt`、`caption`。图片数组顺序就是展示顺序；`cover` 独立指定封面。现有项目文案按原样迁移，`editorialNotes` 提醒下一次编辑时核实实际职责，该备注不会进入网站。
+项目只从根目录 `_projects/*.md` 读取；新增一份 Markdown 就是新增项目。文件名使用 `YYMMDD 品牌 型号.md`，方便在 Obsidian 中浏览。YAML 区域保存项目状态、稳定 ID、地址、日期、品牌、型号、服务范围及来源信息；正文第一段可作为项目简介，之后的标题、段落、列表和图片顺序直接决定详情页内容。正文没有介绍文字时也可以只放图片。
+
+Obsidian 已将粘贴附件目录设为仓库根目录的 `assets/`。直接粘贴图片后使用 Obsidian 自动生成的 `![[图片.png]]` 即可，也兼容标准 Markdown 的 `![说明](/assets/图片.png)`。网站始终使用正文第一张图片作为项目封面，并根据浅色、深色及高对比模式为透明 PNG 提供相应的中性背景。文件重名时 Obsidian 可能生成带数字后缀的名称，Markdown 引用是唯一判断依据。
+
+`_projects` 只允许 Markdown 文件，并且是项目内容的唯一来源。旧的 `content/projects` 和 JSON 项目清单不再参与构建。`assets` 保存二进制资源，不单独决定网站展示；未被 Markdown 引用的图片不会进入发布包。迁移期间仍兼容 `assets/projects/<项目ID>/` 的旧引用，删除旧文件夹前必须先替换相应 Markdown 中的图片。
 
 `id` 是稳定内部标识，`slug` 决定公开地址，`aliases` 保存曾经使用的地址，`legacyIds` 保留旧 `project.html?id=...` 链接。不要为更新日期而改变 ID。修改 slug 时，把原 slug 加入 aliases。归档项目的当前地址和别名都不生成，旧查询地址回到项目选择页。
 
 MasterGo 保留创作和精选展示素材，本地内容文件保存确认过的发布版本。来源链接记录在 `source.url`；未知来源保持空值，不猜测。导入记录包含时间和素材哈希版本，详情见 [MASTERGO_WORKFLOW.md](MASTERGO_WORKFLOW.md)。
+
+仓库根目录可直接作为 Obsidian vault。便携的外观和核心插件设置可以提交；`.obsidian/workspace.json`、移动端工作区和缓存已排除，避免设备窗口、标签与搜索状态污染 Git 或触发内容构建。
 
 ## 发布与回滚
 

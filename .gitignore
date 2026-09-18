@@ -47,3 +47,8 @@ next-env.d.ts
 /outputs/
 /work/
 mastergo-exports/
+
+# Obsidian portable preferences may be versioned; device workspace state may not.
+/.obsidian/workspace.json
+/.obsidian/workspace-mobile.json
+/.obsidian/cache/

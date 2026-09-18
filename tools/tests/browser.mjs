@@ -42,6 +42,7 @@ try {
   await page.selectOption('#theme','dark');await page.reload();assert.equal(await page.locator('#theme').inputValue(),'dark');
   assert.equal((await page.request.get(`${origin}/missing-route/`)).status(),404);
   assert.equal((await page.request.get(`${origin}/content/site.json`)).status(),404);
+  assert.equal((await page.request.get(`${origin}/_projects/240129%20NITECORE%20HC65%20UHE.md`)).status(),404);
   const noJS=await browser.newContext({javaScriptEnabled:false});const plain=await noJS.newPage();
   await plain.goto(`${origin}/nitecore-hc65-uhe/`);assert.ok(await plain.locator('main img').count()>0);
   assert.equal(errors.length,0,errors.join('\n'));
