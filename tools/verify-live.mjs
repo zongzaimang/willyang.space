@@ -1,12 +1,20 @@
-import {hash} from './lib/content.mjs';
-import {verifyArtifact} from './lib/artifact.mjs';
-import {root} from './build-site.mjs';
-import path from 'node:path';
+import {createHash} from 'node:crypto';
+
+const hash=data=>createHash('sha256').update(data).digest('hex');
 
 const origin=process.argv[2];
 if(!origin || !/^https?:\/\//.test(origin)) throw new Error('Usage: node tools/verify-live.mjs <site-origin>');
 const expectedVersion=process.env.EXPECTED_RELEASE;
-const expected=expectedVersion ? {version:expectedVersion} : verifyArtifact(path.join(root,'dist-static'));
+let expected;
+if(expectedVersion) expected={version:expectedVersion};
+else {
+  const [{verifyArtifact},{root},path]=await Promise.all([
+    import('./lib/artifact.mjs'),
+    import('./build-site.mjs'),
+    import('node:path').then(module=>module.default)
+  ]);
+  expected=verifyArtifact(path.join(root,'dist-static'));
+}
 if(expected.preview) throw new Error('Cannot verify a preview as a release');
 let error;
 const attempts=Number(process.env.VERIFY_ATTEMPTS||6);
