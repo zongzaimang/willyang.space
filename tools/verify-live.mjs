@@ -29,4 +29,10 @@ for(let attempt=0;attempt<attempts;attempt++) {
     error=null;break;
   } catch(e) {error=e;console.error(`Verification ${attempt+1}/${attempts}: ${e.message}`);if(attempt+1<attempts)await new Promise(r=>setTimeout(r,10000));}
 }
-if(error) process.exitCode=1;
+if(error) {
+  if(process.env.GITHUB_ACTIONS==='true') {
+    const message=String(error.message).replaceAll('%','%25').replaceAll('\r','%0D').replaceAll('\n','%0A');
+    console.error(`::error title=Live verification failed::${message}`);
+  }
+  process.exitCode=1;
+}

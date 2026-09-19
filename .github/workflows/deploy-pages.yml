@@ -111,6 +111,8 @@ jobs:
       - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify downloaded release artifact
+        run: node tools/release.mjs verify
       - name: Verify deployed pages and assets
         env:
           DEPLOYED_URL: ${{ steps.deployment.outputs.page_url }}
