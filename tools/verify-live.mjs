@@ -5,7 +5,8 @@ import path from 'node:path';
 
 const origin=process.argv[2];
 if(!origin || !/^https?:\/\//.test(origin)) throw new Error('Usage: node tools/verify-live.mjs <site-origin>');
-const expected=verifyArtifact(path.join(root,'dist-static'));
+const expectedVersion=process.env.EXPECTED_RELEASE;
+const expected=expectedVersion ? {version:expectedVersion} : verifyArtifact(path.join(root,'dist-static'));
 if(expected.preview) throw new Error('Cannot verify a preview as a release');
 let error;
 const attempts=Number(process.env.VERIFY_ATTEMPTS||6);
@@ -17,7 +18,7 @@ for(let attempt=0;attempt<attempts;attempt++) {
     const deployed=await manifestResponse.json();
     if(deployed.version!==expected.version) throw new Error(`Expected ${expected.version}, found ${deployed.version}`);
     // Check every route and asset, not merely a successful workflow status.
-    const files=Object.entries(expected.files).filter(([f])=>!['.nojekyll','CNAME'].includes(f));
+    const files=Object.entries(expected.files??deployed.files).filter(([f])=>!['.nojekyll','CNAME'].includes(f));
     for(let start=0;start<files.length;start+=8) await Promise.all(files.slice(start,start+8).map(async([file,digest])=>{
       const url=new URL(`/${file}`,base);url.searchParams.set('release',expected.version);
       const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(20000)});
