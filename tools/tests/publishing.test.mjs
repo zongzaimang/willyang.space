@@ -48,11 +48,11 @@ test('all projects are sourced from the flat Markdown collection',t=>{
   assert.doesNotMatch(html,/content\/projects/);
   assert.ok(!fs.existsSync(path.join(dir,'dist-static/content')));
 });
-test('footer email is independent from the About contact email',t=>{
+test('About and footer emails follow the site configuration',t=>{
   const dir=fixture(t);buildSite(dir);
   const about=fs.readFileSync(path.join(dir,'dist-static/about.html'),'utf8');
   assert.match(about,/class="footer-contact" href="mailto:hello@willyang\.design">hello@willyang\.design/);
-  assert.match(about,/<h2>Contact<\/h2><p><a href="mailto:hello@wenyang\.design">hello@wenyang\.design<\/a>/);
+  assert.match(about,/<h2>Contact<\/h2><p><a href="mailto:hello@willyang\.design">hello@willyang\.design<\/a>/);
 });
 test('drafts, ready items, archives and their unique images never enter production',t=>{
   const dir=fixture(t);
