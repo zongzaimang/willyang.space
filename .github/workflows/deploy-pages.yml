@@ -28,20 +28,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install package manager
+        if: ${{ !inputs.rollback_run_id }}
+        uses: pnpm/action-setup@v4
+      - name: Install locked dependencies
+        if: ${{ !inputs.rollback_run_id }}
+        run: pnpm install --frozen-lockfile
       - name: Validate content and publishing lifecycle
         if: ${{ !inputs.rollback_run_id }}
         run: |
           node tools/check-content.mjs
           node --test tools/tests/publishing.test.mjs
           node tools/build-site.mjs
-      - name: Install browser test dependencies
+      - name: Install Chromium
         if: ${{ !inputs.rollback_run_id }}
-        uses: pnpm/action-setup@v4
-      - name: Install locked dependencies and Chromium
-        if: ${{ !inputs.rollback_run_id }}
-        run: |
-          pnpm install --frozen-lockfile
-          pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium
       - name: Verify browser interactions
         if: ${{ !inputs.rollback_run_id }}
         run: |
