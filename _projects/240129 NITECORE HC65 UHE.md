@@ -13,7 +13,7 @@ scope:
   - Industrial design
   - CMF direction
   - Production development
-cover: /assets/projects/240129-nitecore-hc65-uhe/01-cover-alpha.png
+cover: /assets/projects/240129-nitecore-hc65-uhe/attachments/01.png
 source:
   type: mastergo
   fileTitle: 240129 NITECORE HC65 UHE
@@ -23,4 +23,14 @@ source:
   revision:
 editorialNotes: Migrated without changing existing copy. Confirm project-specific scope and improve image descriptions during the next editorial review.
 ---
-![[01.png]]![[02.png]]![[03.png]]![[04.png]]![[05 1.png]]![[06.png]]
+![NITECORE HC65 UHE image 1](/assets/projects/240129-nitecore-hc65-uhe/attachments/01.png)
+
+![NITECORE HC65 UHE image 2](/assets/projects/240129-nitecore-hc65-uhe/attachments/02.png)
+
+![NITECORE HC65 UHE image 3](/assets/projects/240129-nitecore-hc65-uhe/attachments/03.png)
+
+![NITECORE HC65 UHE image 4](/assets/projects/240129-nitecore-hc65-uhe/attachments/04.png)
+
+![NITECORE HC65 UHE image 5](/assets/projects/240129-nitecore-hc65-uhe/attachments/05.png)
+
+![NITECORE HC65 UHE image 6](/assets/projects/240129-nitecore-hc65-uhe/attachments/06.png)

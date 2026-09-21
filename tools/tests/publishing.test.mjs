@@ -19,6 +19,7 @@ const id='210825-colbor-cl60';
 const project=dir=>loadContent(dir).projects.find(item=>item.id===id);
 const config=dir=>path.join(dir,project(dir).sourceFile);
 const replace=(file,pattern,value)=>fs.writeFileSync(file,fs.readFileSync(file,'utf8').replace(pattern,value));
+const imagePattern=file=>new RegExp(`!\\[[^\\]]*\\]\\(/${file.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')}\\)`);
 
 test('build is reproducible, preserves legacy routes, and excludes source and unused assets',t=>{
   const dir=fixture(t),first=buildSite(dir),second=buildSite(dir);
@@ -39,11 +40,11 @@ test('all projects are sourced from the flat Markdown collection',t=>{
   const hc65=content.projects.find(p=>p.id==='240129-nitecore-hc65-uhe');
   assert.equal(hc65.description,'');
   assert.equal(hc65.images.length,6);
-  assert.ok(hc65.images.every(image=>/^assets\/[^/]+\.png$/.test(image.file)));
-  assert.equal(hc65.cover.file,'assets/01.png');
+  assert.ok(hc65.images.every(image=>/^assets\/projects\/240129-nitecore-hc65-uhe\/attachments\/\d{2}\.png$/.test(image.file)));
+  assert.equal(hc65.cover.file,'assets/projects/240129-nitecore-hc65-uhe/attachments/01.png');
   buildSite(dir);
   const html=fs.readFileSync(path.join(dir,'dist-static/nitecore-hc65-uhe/index.html'),'utf8');
-  assert.match(html,/\/assets\/01\.png/);
+  assert.match(html,/\/assets\/projects\/240129-nitecore-hc65-uhe\/attachments\/01\.png/);
   assert.match(html,/class="project-image transparent"/);
   assert.doesNotMatch(html,/content\/projects/);
   assert.ok(!fs.existsSync(path.join(dir,'dist-static/content')));
@@ -69,11 +70,11 @@ test('drafts, ready items, archives and their unique images never enter producti
 });
 test('failed validation preserves the previous release; duplicates and bad paths fail clearly',t=>{
   const dir=fixture(t),before=buildSite(dir),file=config(dir),original=fs.readFileSync(file,'utf8');
-  const firstImage=path.basename(project(dir).images[0].file);
+  const firstImage=project(dir).images[0].file;
   for(const mutate of [
-    source=>source.replace(`![[${firstImage}]]`,'![[missing.png]]'),
+    source=>source.replace(imagePattern(firstImage),`![Missing image](/assets/projects/${id}/attachments/missing.png)`),
     source=>source.replace(/^slug:.*$/m,'slug: about'),
-    source=>source.replace(`![[${firstImage}]]`,'![[../package.png]]'),
+    source=>source.replace(imagePattern(firstImage),'![Unsafe image](../package.png)'),
     source=>source.replace(/^date:.*$/m,'date: 2024-02-30')
   ]) {
     fs.writeFileSync(file,mutate(original));
@@ -84,7 +85,7 @@ test('failed validation preserves the previous release; duplicates and bad paths
 test('removing an image or archiving a project cleans repeated builds while retaining local originals',t=>{
   const dir=fixture(t);buildSite(dir);
   const p=project(dir),removed=p.images.at(-1),file=config(dir);
-  replace(file,`![[${path.basename(removed.file)}]]`,'');buildSite(dir);
+  replace(file,imagePattern(removed.file),'');buildSite(dir);
   assert.ok(!fs.existsSync(path.join(dir,'dist-static',removed.file)));
   assert.ok(fs.existsSync(path.join(dir,removed.file)));
   setStatus(dir,id,'archived');buildSite(dir);
@@ -124,7 +125,7 @@ test('import rejects duplicate positions, tracks removals, and preserves origina
 });
 test('release rollback restores exact bytes and rejects tampering and extra files',t=>{
   const dir=fixture(t);buildSite(dir);const version=saveRelease(dir);
-  replace(config(dir),/\r?\n---\r?\n(?=!\[\[)/,'\n---\n\nChanged copy\n\n');
+  replace(config(dir),/\r?\n---\r?\n/,'\n---\n\nChanged copy\n\n');
   assert.notEqual(buildSite(dir).version,version);
   assert.equal(restoreRelease(dir,version).version,version);
   assert.equal(project(dir).description,'Changed copy');

@@ -1,22 +1,29 @@
 (() => {
   const root = document.documentElement;
   const media = matchMedia('(prefers-color-scheme: dark)');
-  const select = document.querySelector('#theme');
+  const toggle = document.querySelector('#theme-toggle');
   const themeColor = document.querySelector('meta[name="theme-color"]');
   const updateTheme = (preference) => {
     root.dataset.preference = preference;
     if (preference === 'system') delete root.dataset.theme;
     else root.dataset.theme = preference;
-    if (select) select.value = preference;
     const dark = preference === 'dark' || (preference === 'system' && media.matches);
+    root.dataset.effectiveTheme = dark ? 'dark' : 'light';
+    if (toggle) {
+      const label = dark ? 'Switch to light theme' : 'Switch to dark theme';
+      toggle.setAttribute('aria-label', label);
+      toggle.setAttribute('aria-pressed', String(dark));
+      toggle.title = label;
+    }
     themeColor?.setAttribute('content', dark ? '#171817' : '#ffffff');
   };
   updateTheme(root.dataset.preference || 'system');
   let themeTimer;
-  select?.addEventListener('change', () => {
+  toggle?.addEventListener('click', () => {
     document.body.classList.add('theme-transition');
-    updateTheme(select.value);
-    try { localStorage.setItem('wy-theme', select.value); } catch {}
+    const preference = root.dataset.effectiveTheme === 'dark' ? 'light' : 'dark';
+    updateTheme(preference);
+    try { localStorage.setItem('wy-theme', preference); } catch {}
     clearTimeout(themeTimer);
     themeTimer = setTimeout(() => document.body.classList.remove('theme-transition'), 200);
   });

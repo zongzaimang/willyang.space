@@ -27,7 +27,7 @@ try {
   for(const route of routes) {
     await page.goto(`${origin}/${route}`);
     for(const width of [320,768,1440]) for(const theme of ['light','dark']) {
-      await page.setViewportSize({width,height:900});await page.selectOption('#theme',theme);
+      await page.setViewportSize({width,height:900});await page.evaluate(value=>localStorage.setItem('wy-theme',value),theme);await page.reload();
       assert.equal(await page.locator('h1').count(),1,route);
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${route}: overflow at ${width}`);checks++;
     }
@@ -39,7 +39,7 @@ try {
   assert.ok(await page.locator('#image-viewer').evaluate(el=>el.open));
   await page.locator('.viewer-zoom').click();assert.equal(await page.locator('.viewer-zoom').getAttribute('aria-pressed'),'true');
   await page.keyboard.press('Escape');assert.ok(await first.evaluate(el=>el===document.activeElement));
-  await page.selectOption('#theme','dark');await page.reload();assert.equal(await page.locator('#theme').inputValue(),'dark');
+  await page.evaluate(()=>localStorage.setItem('wy-theme','dark'));await page.reload();assert.equal(await page.locator('html').getAttribute('data-effective-theme'),'dark');assert.equal(await page.locator('#theme-toggle').getAttribute('aria-label'),'Switch to light theme');
   assert.equal((await page.request.get(`${origin}/missing-route/`)).status(),404);
   assert.equal((await page.request.get(`${origin}/content/site.json`)).status(),404);
   assert.equal((await page.request.get(`${origin}/_projects/240129%20NITECORE%20HC65%20UHE.md`)).status(),404);
