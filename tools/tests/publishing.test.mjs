@@ -25,7 +25,7 @@ test('build is reproducible, preserves legacy routes, and excludes source and un
   const current=project(dir);
   assert.equal(first.version,second.version);
   const out=path.join(dir,'dist-static');
-  assert.equal(first.routes.length,11);
+  assert.equal(first.routes.length,16);
   assert.ok(first.routes.includes(`${current.slug}/index.html`));
   assert.match(fs.readFileSync(path.join(out,'project.html'),'utf8'),/"0":"\/nitecore-hc65-uhe\/"/);
   assert.ok(!fs.existsSync(path.join(out,'content')));
@@ -34,7 +34,7 @@ test('build is reproducible, preserves legacy routes, and excludes source and un
 });
 test('all projects are sourced from the flat Markdown collection',t=>{
   const dir=fixture(t),content=loadContent(dir);
-  assert.equal(content.projects.length,5);
+  assert.equal(content.projects.length,10);
   assert.ok(content.projects.every(item=>item.contentFormat==='markdown'&&item.sourceFile.startsWith('_projects/')));
   const hc65=content.projects.find(p=>p.id==='240129-nitecore-hc65-uhe');
   assert.equal(hc65.description,'');
