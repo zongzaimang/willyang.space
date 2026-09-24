@@ -1,11 +1,8 @@
-// Runs before styles paint; storage may be unavailable in private browsing.
+// The site is light-only, including visits with a previously saved dark preference.
 (() => {
-  let preference = 'system';
-  try { preference = localStorage.getItem('wy-theme') || 'system'; } catch {}
-  if (!['light', 'dark', 'system'].includes(preference)) preference = 'system';
-  document.documentElement.dataset.preference = preference;
-  if (preference !== 'system') document.documentElement.dataset.theme = preference;
-  document.documentElement.dataset.effectiveTheme = preference === 'system'
-    ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    : preference;
+  const root = document.documentElement;
+  root.dataset.theme = 'light';
+  root.dataset.effectiveTheme = 'light';
+  root.dataset.preference = 'light';
+  try { localStorage.removeItem('wy-theme'); } catch {}
 })();

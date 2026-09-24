@@ -27,8 +27,10 @@ try {
   for(const route of routes) {
     await page.goto(`${origin}/${route}`);
     for(const width of [320,768,1440]) for(const theme of ['light','dark']) {
-      await page.setViewportSize({width,height:900});await page.evaluate(value=>localStorage.setItem('wy-theme',value),theme);await page.reload();
+      await page.setViewportSize({width,height:900});await page.emulateMedia({colorScheme:theme});await page.evaluate(value=>localStorage.setItem('wy-theme',value),theme);await page.reload();
       assert.equal(await page.locator('h1').count(),1,route);
+      assert.equal(await page.locator('#theme-toggle').count(),0);
+      assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(255, 255, 255)');
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${route}: overflow at ${width}`);checks++;
     }
     for(const img of await page.locator('main img').all()) await img.evaluate(el=>{el.loading='eager';return el.decode();});
@@ -39,17 +41,17 @@ try {
   assert.ok(await page.locator('#image-viewer').evaluate(el=>el.open));
   await page.locator('.viewer-zoom').click();assert.equal(await page.locator('.viewer-zoom').getAttribute('aria-pressed'),'true');
   await page.keyboard.press('Escape');assert.ok(await first.evaluate(el=>el===document.activeElement));
-  await page.evaluate(()=>localStorage.setItem('wy-theme','dark'));await page.reload();assert.equal(await page.locator('html').getAttribute('data-effective-theme'),'dark');assert.equal(await page.locator('#theme-toggle').getAttribute('aria-label'),'Switch to light theme');
+  await page.evaluate(()=>localStorage.setItem('wy-theme','dark'));await page.reload();assert.equal(await page.locator('html').getAttribute('data-effective-theme'),'light');assert.equal(await page.locator('#theme-toggle').count(),0);
   assert.equal((await page.request.get(`${origin}/missing-route/`)).status(),404);
   assert.equal((await page.request.get(`${origin}/content/site.json`)).status(),404);
   assert.equal((await page.request.get(`${origin}/_projects/240129%20NITECORE%20HC65%20UHE.md`)).status(),404);
-  const noJS=await browser.newContext({javaScriptEnabled:false});const plain=await noJS.newPage();
-  await plain.goto(`${origin}/nitecore-hc65-uhe/`);assert.ok(await plain.locator('main img').count()>0);
+  const noJS=await browser.newContext({javaScriptEnabled:false,colorScheme:'dark'});const plain=await noJS.newPage();
+  await plain.goto(`${origin}/nitecore-hc65-uhe/`);assert.ok(await plain.locator('main img').count()>0);assert.equal(await plain.evaluate(()=>getComputedStyle(document.body).backgroundColor),'rgb(255, 255, 255)');
   assert.equal(errors.length,0,errors.join('\n'));
   const live=spawnSync(process.execPath,['tools/verify-live.mjs',origin],{cwd:root,env:{...process.env,VERIFY_ATTEMPTS:'1'},encoding:'utf8',timeout:60000});
   assert.equal(live.status,0,live.stderr||live.error?.message);
   fs.mkdirSync(path.join(root,'outputs'),{recursive:true});
   await page.screenshot({path:path.join(root,'outputs/architecture-project.png'),fullPage:true});
-  fs.writeFileSync(path.join(root,'outputs/architecture-browser-report.json'),JSON.stringify({checks,legacyLinks:true,imageViewer:true,themePersistence:true,noJavaScript:true,sourceIsolation:true,releaseVerification:live.stdout.trim(),errors},null,2));
+  fs.writeFileSync(path.join(root,'outputs/architecture-browser-report.json'),JSON.stringify({checks,legacyLinks:true,imageViewer:true,lightOnly:true,noJavaScript:true,sourceIsolation:true,releaseVerification:live.stdout.trim(),errors},null,2));
   console.log(`Browser checks passed: ${checks} route/viewport/theme combinations, images, legacy links, dialog, focus, theme, 404, source isolation, no-JS.`);
 } finally {await browser?.close();server.kill();}
