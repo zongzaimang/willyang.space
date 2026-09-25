@@ -2,29 +2,16 @@
 id: 191125-synco-ts
 status: published
 slug: synco-ts
-aliases: []
-legacyIds: []
 date: 2019-11-25
 brand: SYNCO
 model: TS
 scope:
   - Industrial design
-  - CMF direction
-  - Production development
-cover: /assets/projects/191125-synco-ts/imports/20260921-local/01.png
-source:
-  type: local-folder
-  fileTitle: 191125 Synco TS
-  page: Website
-  url: https://www.syncoaudio.com/blogs/news/best-wireless-mics
-  importedAt: 2026-09-21
-  revision: 20260921-local
-editorialNotes: Drafted from the local Website image set and an archived SYNCO
-  overview of the WMic-TS. Confirm project-specific responsibilities and final
-  product naming before publication.
 ---
 
-The SYNCO TS is a dual-channel UHF wireless microphone system for interviews, filmmaking and location recording. Two transmitters and one receiver share a compact visual language while keeping channel status, physical controls and connection points immediately legible.
+## Compact UHF wireless microphone system
+
+The SYNCO TS brings two transmitters and a receiver into a compact wireless recording system for interviews and filmmaking. Foldable antennas reduce the space needed for transport while allowing adjustment during use. A shared arrangement of displays, controls and connections gives the three units a consistent identity and keeps channel information readable during setup.
 
 ![SYNCO TS wireless microphone system](/assets/projects/191125-synco-ts/imports/20260921-local/01.png)
 

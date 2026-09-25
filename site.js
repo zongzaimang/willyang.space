@@ -20,11 +20,27 @@
   const dialog = document.querySelector('#image-viewer');
   let opener, previousOverflow;
   if (dialog && typeof dialog.showModal === 'function') {
+    const stage = dialog.querySelector('.viewer-stage');
+    const viewerImage = stage.querySelector('img');
+    const status = stage.querySelector('.viewer-status');
+    const finishLoading = () => {
+      stage.setAttribute('aria-busy', 'false');
+      status.hidden = Boolean(viewerImage.naturalWidth);
+      status.textContent = viewerImage.naturalWidth ? '' : 'Image unavailable. Please close and try again.';
+      viewerImage.hidden = !viewerImage.naturalWidth;
+    };
+    viewerImage.addEventListener('load', finishLoading);
+    viewerImage.addEventListener('error', finishLoading);
     document.querySelectorAll('[data-view-image]').forEach(link => link.addEventListener('click', event => {
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault(); opener = link;
       const source = link.querySelector('img'), image = dialog.querySelector('img');
+      stage.setAttribute('aria-busy', 'true');
+      status.hidden = false;
+      status.textContent = 'Loading image…';
+      image.hidden = false;
       image.src = link.href; image.alt = source.alt;
+      if (image.complete) finishLoading();
       dialog.querySelector('#viewer-title').textContent = source.alt;
       previousOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
@@ -33,12 +49,15 @@
       dialog.querySelector('.viewer-zoom').textContent = 'Original size';
       dialog.showModal(); dialog.querySelector('.viewer-close').focus();
       dialog.querySelector('.viewer-stage').scrollTop = 0;
+      stage.scrollLeft = 0;
     }));
     dialog.querySelector('.viewer-close').addEventListener('click', () => dialog.close());
     dialog.querySelector('.viewer-zoom').addEventListener('click', event => {
       const zoomed = dialog.querySelector('.viewer-stage').classList.toggle('is-zoomed');
       event.currentTarget.setAttribute('aria-pressed', String(zoomed));
-      event.currentTarget.textContent = zoomed ? 'Fit width' : 'Original size';
+      event.currentTarget.textContent = zoomed ? 'Fit to window' : 'Original size';
+      stage.scrollTop = 0;
+      stage.scrollLeft = 0;
     });
     dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
     dialog.addEventListener('close', () => { document.body.style.overflow = previousOverflow || ''; opener?.focus({ preventScroll: true }); });

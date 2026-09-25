@@ -38,7 +38,8 @@ test('all projects are sourced from the flat Markdown collection',t=>{
   assert.equal(content.projects.length,10);
   assert.ok(content.projects.every(item=>item.contentFormat==='markdown'&&item.sourceFile.startsWith('_projects/')));
   const hc65=content.projects.find(p=>p.id==='240129-nitecore-hc65-uhe');
-  assert.equal(hc65.description,'');
+  assert.ok(hc65.description.length>0);
+  assert.equal(hc65.bodyBlocks[0].type,'heading');
   assert.equal(hc65.images.length,6);
   assert.ok(hc65.images.every(image=>/^assets\/projects\/240129-nitecore-hc65-uhe\/attachments\/\d{2}\.png$/.test(image.file)));
   assert.equal(hc65.cover.file,'assets/projects/240129-nitecore-hc65-uhe/attachments/01.png');
@@ -46,6 +47,9 @@ test('all projects are sourced from the flat Markdown collection',t=>{
   const html=fs.readFileSync(path.join(dir,'dist-static/nitecore-hc65-uhe/index.html'),'utf8');
   assert.match(html,/\/assets\/projects\/240129-nitecore-hc65-uhe\/attachments\/01\.png/);
   assert.match(html,/class="project-image transparent"/);
+  assert.ok(html.includes(`<h2 class="project-product-title">${hc65.bodyBlocks[0].text}</h2>`));
+  assert.equal(html.split(hc65.bodyBlocks[0].text).length-1,1);
+  assert.ok(html.indexOf('project-product-title')<html.indexOf('<p class="intro">'));
   assert.doesNotMatch(html,/content\/projects/);
   assert.ok(!fs.existsSync(path.join(dir,'dist-static/content')));
 });
@@ -94,6 +98,8 @@ test('removing an image or archiving a project cleans repeated builds while reta
 test('new → import preview → apply → ready → preview → published works without editing templates',t=>{
   const dir=fixture(t),newId='260918-test-product';
   const created=newProject(dir,newId),file=path.join(dir,created.sourceFile);
+  const coreProperties=['id','status','slug','date','brand','model','scope'];
+  assert.deepEqual(Object.keys(created).filter(key=>key!=='sourceFile'),coreProperties);
   replace(file,/^brand:.*$/m,'brand: TEST');replace(file,/^model:.*$/m,'model: Product');replace(file,'scope: []','scope:\n  - Industrial design');replace(file,'Add the project introduction here.','Test description');
   const source=path.join(dir,'exports');fs.mkdirSync(source);
   const image=project(dir).images[0].file;
@@ -101,7 +107,12 @@ test('new → import preview → apply → ready → preview → published works
   const before=fs.readFileSync(file,'utf8');
   assert.equal(importProject(dir,newId,source).applied,false);
   assert.equal(fs.readFileSync(file,'utf8'),before);
-  importProject(dir,newId,source,{apply:true});
+  const imported=importProject(dir,newId,source,{apply:true});
+  assert.doesNotMatch(fs.readFileSync(file,'utf8'),/^(cover|source|aliases|legacyIds|editorialNotes|copySources|copyReviewedAt):/m);
+  assert.equal(loadContent(dir).projects.find(p=>p.id===newId).cover.file,`assets/projects/${newId}/imports/${imported.revision}/01.png`);
+  const importRecord=readJSON(path.join(dir,`outputs/imports/${newId}/${imported.revision}.json`));
+  assert.equal(importRecord.source,source);
+  assert.ok(importRecord.importedAt);
   assert.throws(()=>setStatus(dir,newId,'published'),/ready/);
   setStatus(dir,newId,'ready');
   const preview=buildSite(dir,{preview:true});assert.equal(preview.preview,true);

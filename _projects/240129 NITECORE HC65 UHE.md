@@ -11,18 +11,12 @@ brand: NITECORE
 model: HC65 UHE
 scope:
   - Industrial design
-  - CMF direction
-  - Production development
-cover: /assets/projects/240129-nitecore-hc65-uhe/attachments/01.png
-source:
-  type: mastergo
-  fileTitle: 240129 NITECORE HC65 UHE
-  page: HC65 UHE 网站
-  url:
-  importedAt:
-  revision:
-editorialNotes: Migrated without changing existing copy. Confirm project-specific scope and improve image descriptions during the next editorial review.
 ---
+
+## Rechargeable outdoor headlamp
+
+The NITECORE HC65 UHE combines a primary beam, close-range white light and red light in a compact aluminum headlamp. Two differently shaped buttons make the main controls distinguishable by touch, while the removable bracket positions the lamp close to its center of gravity. The design balances lighting flexibility, direct operation and wearing comfort for outdoor use.
+
 ![NITECORE HC65 UHE image 1](/assets/projects/240129-nitecore-hc65-uhe/attachments/01.png)
 
 ![NITECORE HC65 UHE image 2](/assets/projects/240129-nitecore-hc65-uhe/attachments/02.png)

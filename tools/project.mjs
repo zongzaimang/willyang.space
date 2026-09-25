@@ -26,7 +26,7 @@ export function newProject(workspace,id) {
   const slug=id.slice(7);
   const content=loadContent(workspace);
   if(content.projects.some(p=>p.slug===slug||(p.aliases||[]).includes(slug))) throw new Error(`Route already exists: ${slug}`);
-  const metadata={id,status:'draft',slug,aliases:[],legacyIds:[],date:`20${id.slice(0,2)}-${id.slice(2,4)}-${id.slice(4,6)}`,brand:'',model:'',scope:[],cover:null,source:{type:'mastergo',fileTitle:'',page:'网站',url:null,importedAt:null,revision:null}};
+  const metadata={id,status:'draft',slug,date:`20${id.slice(0,2)}-${id.slice(2,4)}-${id.slice(4,6)}`,brand:'',model:'',scope:[]};
   const relative=`_projects/${id.slice(0,6)} ${id.slice(7).replaceAll('-',' ')}.md`,file=within(workspace,relative);
   if(fs.existsSync(file))throw new Error(`Project file already exists: ${relative}`);
   writeMarkdown(file,metadata,'Add the project introduction here.');
@@ -54,7 +54,7 @@ export function importProject(workspace,id,source,{apply=false}={}) {
     dimensions(file);
     return {name:e.name,position:Number(e.name.slice(0,2)),hash:hash(bytes),bytes};
   }).sort((a,b)=>a.position-b.position);
-  if(!files.some(f=>f.position===1)) throw new Error('A detail image at position 01 is required; 00 is cover only.');
+  if(!files.some(f=>f.position===1)) throw new Error('A detail image at position 01 is required; 00 is retained only in the import snapshot.');
   if(new Set(files.map(f=>f.position)).size!==files.length) throw new Error('Duplicate image positions in export');
   const revision=hash(JSON.stringify(files.map(({name,hash})=>({name,hash}))));
   const folder=`assets/projects/${id}/imports/${revision}`;
@@ -78,13 +78,11 @@ export function importProject(workspace,id,source,{apply=false}={}) {
     const previous=old.find(o=>oldDigest(o)===f.hash);
     return {file:`${folder}/${f.name}`,alt:previous?.alt||`${p.brand} ${p.model} — project image ${index+1}`,caption:previous?.caption||''};
   };
-  p.cover=asImage(files.find(f=>f.position===0)||files.find(f=>f.position===1),0);
   p.images=files.filter(f=>f.position>0).map(asImage);
-  p.source={...p.source,importedAt:new Date().toISOString(),revision};
+  p.cover=p.images[0];
+  const importedAt=new Date().toISOString();
   validateProject(workspace,p);
   const document=splitMarkdown(config);
-  document.metadata.cover='/'+p.cover.file;
-  document.metadata.source=p.source;
   const regexEscape=value=>value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
   let prose=document.body;
   for(const image of old) {
@@ -98,7 +96,7 @@ export function importProject(workspace,id,source,{apply=false}={}) {
   const temporary=config+'.incoming';
   writeMarkdown(temporary,document.metadata,`${prose}\n\n${imageBody}`);
   fs.renameSync(temporary,config);
-  writeJSON(within(workspace,`outputs/imports/${id}/${revision}.json`),{id,revision,importedAt:p.source.importedAt,source:sourcePath,report});
+  writeJSON(within(workspace,`outputs/imports/${id}/${revision}.json`),{id,revision,importedAt,source:sourcePath,report});
   return {id,revision,applied:true,report};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
